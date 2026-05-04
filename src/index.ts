@@ -1,105 +1,140 @@
-type Steel ={
-    name: string,
-    standard?:string,
-    C: {
-        min:number,        
-        max:number,        
-    },
-    Mn: number,
-    yieldStrength:number
-}
+import rawData from "./steels_base.json";
 
-const steelArr: Steel[] = [
-    { name: "09Г2С", C: {"min": 0.17, "max": 0.24}, Mn: 1.6, yieldStrength: 345 },
-    { name: "Ст3", C: {"min": 0.17, "max": 0.24}, Mn: 0.5, yieldStrength: 235 },
-    { name: "20", C: {"min": 0.17, "max": 0.24}, Mn: 0.5, yieldStrength: 245 },
-    { name: "30", C: {"min": 0.17, "max": 0.24}, Mn: 0.6, yieldStrength: 355 },
-    { name: "40Х", C: {"min": 0.17, "max": 0.24}, Mn: 0.8, yieldStrength: 600 },
-    { name: "30ХГСА", C: {"min": 0.17, "max": 0.24}, Mn: 0.8, yieldStrength: 700 },
-    { name: "15ГС", C: {"min": 0.17, "max": 0.24}, Mn: 1.3, yieldStrength: 390 },
-    { name: "10Г2", C: {"min": 0.17, "max": 0.24}, Mn: 1.5, yieldStrength: 345 },
-    { name: "35", C: {"min": 0.17, "max": 0.24}, Mn: 0.7, yieldStrength: 500 },
-    { name: "45", C: {"min": 0.19, "max": 0.34}, Mn: 0.7, yieldStrength: 600 }
-  ]
+export type MinMax = {
+    min: number | null;
+    max: number | null;
+};
 
-  const getSteel = (name:string)=>{
-    return steelArr.find(s=>s.name ===name)
-  }
+export type SteelCategory =
+    | "конструкционная углеродистая"
+    | "конструкционная легированная"
+    | "рессорно-пружинная"
+    | "подшипниковая"
+    | "инструментальная углеродистая"
+    | "инструментальная легированная"
+    | "быстрорежущая"
+    | "коррозионностойкая";
 
-const compareSteel=(aName:string, bName:string)=>{
-    const a = getSteel(aName);
-    const b = getSteel(bName);
+export type SteelStandards = {
+    aisi: string | null;
+    din_en: string | null;
+    gost: string;
+    jis: string | null;
+};
 
-    if(!a || !b) return null
+export type ChemicalComposition = {
+    C: MinMax;
+    Cr: MinMax;
+    Mo: MinMax;
+    V: MinMax;
+    Mn: MinMax;
+    Si: MinMax;
+    Ni: MinMax;
+    P: MinMax;
+    S: MinMax;
+    Cu: MinMax;
+    Ti?: MinMax;
+    W?: MinMax;
+    Co?: MinMax;
+    Al?: MinMax;
+    As?: MinMax;
+};
 
-    return calculateSimilarity(a,b)
+export type MechanicalProperties = {
+    hardness_hrc: MinMax;
+    hardness_hb: MinMax;
+    tensile_strength_mpa: number | null;
+    yield_strength_mpa: number | null;
+    elongation_percent: number | null;
+    impact_toughness_j_cm2: number | null;
+};
 
-}
+export type PhysicalProperties = {
+    density_g_cm3: number | null;
+    thermal_conductivity_w_mk: number | null;
+};
 
-const calculateSimilarity= (a:Steel, b:Steel)=>{
-    const Cdiff = compareRange({min: a.C.min, max: a.C.max},{min:b.C.min, max:b.C.max});
-    const Mndiff = Math.abs(a.Mn - b.Mn);
-    const Yielddiff =  Math.abs(a.yieldStrength - b.yieldStrength);
+export type Steel = {
+    id: string;
+    name: string;
+    category: SteelCategory;
+    standards: SteelStandards;
+    chemical_composition: ChemicalComposition;
+    mechanical_properties: MechanicalProperties;
+    physical_properties: PhysicalProperties;
+    description: string;
+};
+
+export type SteelDatabase = {
+    version: string;
+    source_standard: string;
+    _schema?: Record<string, unknown>;
+    steels: Steel[];
+};
+
+const db = rawData as unknown as SteelDatabase;
+
+export const steels: Steel[] = db.steels;
+
+export const getSteel = (name: string): Steel | undefined =>
+    steels.find((s) => s.name === name);
+
+const avg = (r: MinMax): number => {
+    if (r.min !== null && r.max !== null) return (r.min + r.max) / 2;
+    return r.min ?? r.max ?? 0;
+};
+
+const compareRange = (a: MinMax, b: MinMax): number => {
+    if (a.min === null || a.max === null || b.min === null || b.max === null) return 0;
+
+    const overlap = Math.min(a.max, b.max) - Math.max(a.min, b.min);
+    if (overlap < 0) return 0;
+
+    const total = Math.max(a.max, b.max) - Math.min(a.min, b.min);
+    if (total === 0) return 1;
+
+    return overlap / total;
+};
+
+const calculateSimilarity = (a: Steel, b: Steel) => {
+    const Cdiff = compareRange(a.chemical_composition.C, b.chemical_composition.C);
+    const Mndiff = Math.abs(avg(a.chemical_composition.Mn) - avg(b.chemical_composition.Mn));
+    const ay = a.mechanical_properties.yield_strength_mpa ?? 0;
+    const by = b.mechanical_properties.yield_strength_mpa ?? 0;
+    const Yielddiff = Math.abs(ay - by);
 
     const Csim = 1 - Cdiff / 1;
     const Mnsim = 1 - Mndiff / 2;
     const Yieldsim = 1 - Yielddiff / 1000;
 
-    const similarity = 
-        Csim *  .5 +
-        Mnsim * .2 +
-        Yieldsim * .3
+    const similarity =
+        Csim * 0.5 +
+        Mnsim * 0.2 +
+        Yieldsim * 0.3;
 
-        return {similarity,
-            details: {
-                Cdiff,
-                Mndiff,
-                Yielddiff: Yielddiff
+    return {
+        similarity,
+        details: { Cdiff, Mndiff, Yielddiff },
+    };
+};
 
-            }
-}
-}
+export const compareSteel = (aName: string, bName: string) => {
+    const a = getSteel(aName);
+    const b = getSteel(bName);
+    if (!a || !b) return null;
+    return calculateSimilarity(a, b);
+};
 
-const findSimilar = (s: string)=>{
-    const base = getSteel(s);
-    if (!base) return null
-    const result = steelArr.filter(i=>i.name!==base.name)
-    // .map(item=>calculateSimilarity(item,base))
-    .map(item =>({
-        steel: item.name,
-        similarity: calculateSimilarity(item, base).similarity
-    }))
-    .sort((a, b) => b.similarity - a.similarity);
-    return result
-}
+export const findSimilar = (name: string) => {
+    const base = getSteel(name);
+    if (!base) return null;
+    return steels
+        .filter((i) => i.name !== base.name)
+        .map((item) => ({
+            steel: item.name,
+            similarity: calculateSimilarity(item, base).similarity,
+        }))
+        .sort((a, b) => b.similarity - a.similarity);
+};
 
-type Range1 = {
-    min: number,
-    max: number
-}
-
-
-const compareRange=(a: Range1, b: Range1): number=>{
-    const overlap = 
-    Math.min(a.max, b.max) - 
-    Math.max(a.min, b.min);
-
-    if (overlap<0) return 0
-    
-
-    const total = 
-    Math.max(a.max, b.max)-
-    Math.min(a.min, b.min); 
-
-    if (total===0) return 1
-    
-
-    const similarity = overlap/total;
-
-    return similarity
-}
-
-console.log(findSimilar("09Г2С"))
-
-
-
+console.log(findSimilar("Ст3"));
