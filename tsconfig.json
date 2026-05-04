@@ -5,6 +5,9 @@
     "module": "ESNext",
     "target": "ES2019",
     "declaration": true,
-    "strict": true
+    "strict": true,
+    "moduleResolution": "Bundler",
+    "resolveJsonModule": true,
+    "esModuleInterop": true
   }
 }

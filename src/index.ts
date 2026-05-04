@@ -37,7 +37,7 @@ const compareSteel=(aName:string, bName:string)=>{
 }
 
 const calculateSimilarity= (a:Steel, b:Steel)=>{
-    const Cdiff = Math.abs(a.C.max - b.C.max);
+    const Cdiff = compareRange({min: a.C.min, max: a.C.max},{min:b.C.min, max:b.C.max});
     const Mndiff = Math.abs(a.Mn - b.Mn);
     const Yielddiff =  Math.abs(a.yieldStrength - b.yieldStrength);
 
@@ -98,5 +98,8 @@ const compareRange=(a: Range1, b: Range1): number=>{
 
     return similarity
 }
-console.log(compareRange({min:0.12, max:0.30},{min:0.17, max:0.34}))
-// console.log(findSimilar("09Г2С"))
+
+console.log(findSimilar("09Г2С"))
+
+
+
