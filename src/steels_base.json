@@ -1,0 +1,4474 @@
+{
+  "version": "1.0",
+  "source_standard": "GOST",
+  "_schema": {
+    "_about": "Описание полей каждой записи в массиве `steels`. Этот блок — справочный, на парсинг не влияет.",
+    "id": "Уникальный идентификатор марки. Формат: <стандарт>-<slug>, kebab-case, латинская транслитерация (например, gost-40x, gost-12x18n10t).",
+    "name": "Официальное обозначение марки в оригинале (кириллица для ГОСТ).",
+    "category": "Тип стали по назначению. Возможные значения: 'конструкционная углеродистая', 'конструкционная легированная', 'рессорно-пружинная', 'инструментальная углеродистая', 'инструментальная легированная', 'коррозионностойкая'.",
+    "standards": {
+      "_about": "Аналоги по зарубежным стандартам. Для ключей без прямого аналога — null.",
+      "aisi": "Аналог по AISI/SAE (США), например '1045', '5140', 'D2'.",
+      "din_en": "Аналог по DIN/EN (Европа), часто с номером Werkstoff в скобках, например 'C45 (1.1191)'.",
+      "gost": "Обозначение по ГОСТ — основной стандарт для записей в этом файле.",
+      "jis": "Аналог по JIS (Япония), например 'S45C', 'SKD11'."
+    },
+    "chemical_composition": {
+      "_unit": "Массовая доля элемента, %.",
+      "_format": "Каждый элемент — объект {min, max}. Одно или оба значения могут быть null. Например, 'Max 0.04' → {min: null, max: 0.04}; '≥ 0.7' → {min: 0.7, max: null}.",
+      "C": "Углерод — основной упрочнитель: повышает твёрдость и прочность, снижает пластичность и свариваемость.",
+      "Cr": "Хром — повышает прокаливаемость, твёрдость, износо- и коррозионную стойкость (>13% — нержавеющая).",
+      "Mo": "Молибден — повышает прокаливаемость и теплостойкость, снижает отпускную хрупкость.",
+      "V": "Ванадий — измельчает зерно, повышает износостойкость и прочность за счёт карбидов.",
+      "W": "Вольфрам — повышает теплостойкость и красностойкость; сильный карбидообразователь.",
+      "Ti": "Титан — стабилизирует углерод (связывает в карбиды TiC), защищает от межкристаллитной коррозии в нержавеющих сталях.",
+      "Mn": "Марганец — раскислитель и десульфуратор; повышает прокаливаемость и прочность.",
+      "Si": "Кремний — раскислитель; повышает упругость и предел текучести (важен для пружинных сталей).",
+      "Ni": "Никель — повышает вязкость, прокаливаемость и коррозионную стойкость; стабилизатор аустенита.",
+      "P": "Фосфор — вредная примесь, вызывает хладноломкость; обычно ограничен сверху.",
+      "S": "Сера — вредная примесь, вызывает красноломкость; обычно ограничена сверху.",
+      "Cu": "Медь — чаще как примесь; в малых количествах повышает коррозионную стойкость в атмосфере.",
+      "As": "Мышьяк — вредная примесь, ограничивается сверху."
+    },
+    "mechanical_properties": {
+      "_about": "Механические свойства. Если значение неизвестно — null (ключ остаётся).",
+      "hardness_hrc": "Твёрдость по Роквеллу, шкала C, единиц HRC. Применяется для закалённых сталей (диапазон ~20–70). Объект {min, max}.",
+      "hardness_hb": "Твёрдость по Бринеллю, единиц HB. Применяется для отожжённого/нормализованного состояния (диапазон ~100–450). Объект {min, max}.",
+      "tensile_strength_mpa": "Предел прочности при растяжении (σв), МПа. Напряжение, при котором образец разрушается.",
+      "yield_strength_mpa": "Предел текучести (σ0.2 или σт), МПа. Напряжение начала пластической деформации.",
+      "elongation_percent": "Относительное удлинение при разрыве (δ5), %. Мера пластичности.",
+      "impact_toughness_j_cm2": "Ударная вязкость (KCU), Дж/см². Энергия разрушения образца с надрезом при ударе."
+    },
+    "physical_properties": {
+      "density_g_cm3": "Плотность (ρ), г/см³. Для большинства сталей — 7.7–7.9.",
+      "thermal_conductivity_w_mk": "Теплопроводность (λ), Вт/(м·К), при ~20 °C."
+    },
+    "description": "Краткая характеристика (1–2 предложения): класс, ключевые свойства и типичные применения."
+  },
+  "steels": [
+    {
+      "id": "gost-st20",
+      "name": "Сталь 20",
+      "category": "конструкционная углеродистая",
+      "standards": {
+        "aisi": "1020",
+        "din_en": "C22 (1.0402)",
+        "gost": "20",
+        "jis": "S20C"
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 0.17,
+          "max": 0.24
+        },
+        "Cr": {
+          "min": null,
+          "max": 0.25
+        },
+        "Mo": {
+          "min": null,
+          "max": null
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": 0.35,
+          "max": 0.65
+        },
+        "Si": {
+          "min": 0.17,
+          "max": 0.37
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.3
+        },
+        "P": {
+          "min": null,
+          "max": 0.035
+        },
+        "S": {
+          "min": null,
+          "max": 0.04
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.3
+        },
+        "As": {
+          "min": null,
+          "max": 0.08
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": null,
+          "max": null
+        },
+        "hardness_hb": {
+          "min": 163,
+          "max": 207
+        },
+        "tensile_strength_mpa": 410,
+        "yield_strength_mpa": 245,
+        "elongation_percent": 25,
+        "impact_toughness_j_cm2": 78
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.859,
+        "thermal_conductivity_w_mk": 52
+      },
+      "description": "Низкоуглеродистая конструкционная сталь с хорошей пластичностью и свариваемостью. Применяется для малонагруженных деталей, штампованных изделий, труб, цементируемых деталей."
+    },
+    {
+      "id": "gost-st45",
+      "name": "Сталь 45",
+      "category": "конструкционная углеродистая",
+      "standards": {
+        "aisi": "1045",
+        "din_en": "C45 (1.1191)",
+        "gost": "45",
+        "jis": "S45C"
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 0.42,
+          "max": 0.5
+        },
+        "Cr": {
+          "min": null,
+          "max": 0.25
+        },
+        "Mo": {
+          "min": null,
+          "max": null
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": 0.5,
+          "max": 0.8
+        },
+        "Si": {
+          "min": 0.17,
+          "max": 0.37
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.3
+        },
+        "P": {
+          "min": null,
+          "max": 0.035
+        },
+        "S": {
+          "min": null,
+          "max": 0.04
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.3
+        },
+        "As": {
+          "min": null,
+          "max": 0.08
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": null,
+          "max": null
+        },
+        "hardness_hb": {
+          "min": 207,
+          "max": 229
+        },
+        "tensile_strength_mpa": 600,
+        "yield_strength_mpa": 355,
+        "elongation_percent": 16,
+        "impact_toughness_j_cm2": null
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.826,
+        "thermal_conductivity_w_mk": 47
+      },
+      "description": "Среднеуглеродистая качественная сталь общего машиностроения. Применяется для валов, шестерён, шатунов и других нормализованных и улучшаемых деталей с поверхностной закалкой."
+    },
+    {
+      "id": "gost-40x",
+      "name": "40Х",
+      "category": "конструкционная легированная",
+      "standards": {
+        "aisi": "5140",
+        "din_en": "41Cr4 (1.7035)",
+        "gost": "40Х",
+        "jis": "SCr440"
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 0.36,
+          "max": 0.44
+        },
+        "Cr": {
+          "min": 0.8,
+          "max": 1.1
+        },
+        "Mo": {
+          "min": null,
+          "max": null
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": 0.5,
+          "max": 0.8
+        },
+        "Si": {
+          "min": 0.17,
+          "max": 0.37
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.3
+        },
+        "P": {
+          "min": null,
+          "max": 0.035
+        },
+        "S": {
+          "min": null,
+          "max": 0.035
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.3
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": null,
+          "max": null
+        },
+        "hardness_hb": {
+          "min": 217,
+          "max": 269
+        },
+        "tensile_strength_mpa": 980,
+        "yield_strength_mpa": 785,
+        "elongation_percent": 10,
+        "impact_toughness_j_cm2": 59
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.82,
+        "thermal_conductivity_w_mk": 46
+      },
+      "description": "Хромистая улучшаемая сталь с высокой прочностью и износостойкостью после закалки и отпуска. Используется для валов, осей, шестерён, втулок и других ответственных нагруженных деталей."
+    },
+    {
+      "id": "gost-30hgsa",
+      "name": "30ХГСА",
+      "category": "конструкционная легированная",
+      "standards": {
+        "aisi": null,
+        "din_en": null,
+        "gost": "30ХГСА",
+        "jis": null
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 0.28,
+          "max": 0.34
+        },
+        "Cr": {
+          "min": 0.8,
+          "max": 1.1
+        },
+        "Mo": {
+          "min": null,
+          "max": null
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": 0.8,
+          "max": 1.1
+        },
+        "Si": {
+          "min": 0.9,
+          "max": 1.2
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.3
+        },
+        "P": {
+          "min": null,
+          "max": 0.025
+        },
+        "S": {
+          "min": null,
+          "max": 0.025
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.3
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": null,
+          "max": null
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 229
+        },
+        "tensile_strength_mpa": 1080,
+        "yield_strength_mpa": 830,
+        "elongation_percent": 10,
+        "impact_toughness_j_cm2": 49
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.85,
+        "thermal_conductivity_w_mk": 38
+      },
+      "description": "Хромансиль — легированная конструкционная сталь высокой прочности и вязкости. Применяется в авиастроении, машиностроении и оборонной промышленности для ответственных силовых деталей."
+    },
+    {
+      "id": "gost-65g",
+      "name": "65Г",
+      "category": "рессорно-пружинная",
+      "standards": {
+        "aisi": "1066",
+        "din_en": "66Mn4",
+        "gost": "65Г",
+        "jis": null
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 0.62,
+          "max": 0.7
+        },
+        "Cr": {
+          "min": null,
+          "max": 0.25
+        },
+        "Mo": {
+          "min": null,
+          "max": null
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": 0.9,
+          "max": 1.2
+        },
+        "Si": {
+          "min": 0.17,
+          "max": 0.37
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.25
+        },
+        "P": {
+          "min": null,
+          "max": 0.035
+        },
+        "S": {
+          "min": null,
+          "max": 0.035
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.2
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": null,
+          "max": null
+        },
+        "hardness_hb": {
+          "min": 241,
+          "max": 285
+        },
+        "tensile_strength_mpa": 980,
+        "yield_strength_mpa": 785,
+        "elongation_percent": 8,
+        "impact_toughness_j_cm2": null
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.85,
+        "thermal_conductivity_w_mk": 36
+      },
+      "description": "Рессорно-пружинная марганцевая сталь с высокой упругостью и износостойкостью. Применяется для рессор, пружин, подпружинных шайб, фрикционных дисков и других упругих элементов."
+    },
+    {
+      "id": "gost-u8",
+      "name": "У8",
+      "category": "инструментальная углеродистая",
+      "standards": {
+        "aisi": "W108",
+        "din_en": "C80W1 (1.1525)",
+        "gost": "У8",
+        "jis": "SK5"
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 0.75,
+          "max": 0.84
+        },
+        "Cr": {
+          "min": null,
+          "max": 0.2
+        },
+        "Mo": {
+          "min": null,
+          "max": null
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": 0.17,
+          "max": 0.28
+        },
+        "Si": {
+          "min": 0.17,
+          "max": 0.33
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.25
+        },
+        "P": {
+          "min": null,
+          "max": 0.03
+        },
+        "S": {
+          "min": null,
+          "max": 0.028
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.25
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": 61,
+          "max": 64
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 187
+        },
+        "tensile_strength_mpa": 740,
+        "yield_strength_mpa": null,
+        "elongation_percent": 10,
+        "impact_toughness_j_cm2": null
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.83,
+        "thermal_conductivity_w_mk": null
+      },
+      "description": "Углеродистая инструментальная сталь для деревообрабатывающего и слесарного инструмента — стамесок, долот, ножей, топоров, фрез по дереву. После закалки имеет высокую твёрдость, но малую теплостойкость."
+    },
+    {
+      "id": "gost-u10",
+      "name": "У10",
+      "category": "инструментальная углеродистая",
+      "standards": {
+        "aisi": "W110",
+        "din_en": "C105W1 (1.1645)",
+        "gost": "У10",
+        "jis": "SK3"
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 0.95,
+          "max": 1.09
+        },
+        "Cr": {
+          "min": null,
+          "max": 0.2
+        },
+        "Mo": {
+          "min": null,
+          "max": null
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": 0.17,
+          "max": 0.33
+        },
+        "Si": {
+          "min": 0.17,
+          "max": 0.33
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.25
+        },
+        "P": {
+          "min": null,
+          "max": 0.03
+        },
+        "S": {
+          "min": null,
+          "max": 0.028
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.25
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": 62,
+          "max": 64
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 197
+        },
+        "tensile_strength_mpa": 750,
+        "yield_strength_mpa": null,
+        "elongation_percent": null,
+        "impact_toughness_j_cm2": null
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.81,
+        "thermal_conductivity_w_mk": 40
+      },
+      "description": "Высокоуглеродистая инструментальная сталь повышенной твёрдости и износостойкости. Применяется для напильников, метчиков, плашек, ножей, пил, измерительного инструмента."
+    },
+    {
+      "id": "gost-h12mf",
+      "name": "Х12МФ",
+      "category": "инструментальная легированная",
+      "standards": {
+        "aisi": "D2",
+        "din_en": "X160CrMoV12 (1.2379)",
+        "gost": "Х12МФ",
+        "jis": "SKD11"
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 1.45,
+          "max": 1.65
+        },
+        "Cr": {
+          "min": 11.0,
+          "max": 12.5
+        },
+        "Mo": {
+          "min": 0.4,
+          "max": 0.6
+        },
+        "V": {
+          "min": 0.15,
+          "max": 0.3
+        },
+        "Mn": {
+          "min": 0.15,
+          "max": 0.45
+        },
+        "Si": {
+          "min": 0.1,
+          "max": 0.4
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.4
+        },
+        "P": {
+          "min": null,
+          "max": 0.03
+        },
+        "S": {
+          "min": null,
+          "max": 0.03
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.3
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": 60,
+          "max": 64
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 255
+        },
+        "tensile_strength_mpa": null,
+        "yield_strength_mpa": null,
+        "elongation_percent": null,
+        "impact_toughness_j_cm2": null
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.7,
+        "thermal_conductivity_w_mk": null
+      },
+      "description": "Высокохромистая штамповая сталь холодного деформирования (аналог D2). Сочетает высокую износостойкость и прокаливаемость; широко используется для штампов, ножей, режущего инструмента."
+    },
+    {
+      "id": "gost-9hs",
+      "name": "9ХС",
+      "category": "инструментальная легированная",
+      "standards": {
+        "aisi": null,
+        "din_en": "90CrSi5",
+        "gost": "9ХС",
+        "jis": null
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 0.85,
+          "max": 0.95
+        },
+        "Cr": {
+          "min": 0.95,
+          "max": 1.25
+        },
+        "Mo": {
+          "min": null,
+          "max": 0.2
+        },
+        "V": {
+          "min": null,
+          "max": 0.15
+        },
+        "W": {
+          "min": null,
+          "max": 0.2
+        },
+        "Mn": {
+          "min": 0.3,
+          "max": 0.6
+        },
+        "Si": {
+          "min": 1.2,
+          "max": 1.6
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.4
+        },
+        "P": {
+          "min": null,
+          "max": 0.03
+        },
+        "S": {
+          "min": null,
+          "max": 0.03
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.3
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": 62,
+          "max": 64
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 241
+        },
+        "tensile_strength_mpa": 790,
+        "yield_strength_mpa": 445,
+        "elongation_percent": 26,
+        "impact_toughness_j_cm2": 39
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.83,
+        "thermal_conductivity_w_mk": null
+      },
+      "description": "Хромокремнистая легированная инструментальная сталь повышенной прокаливаемости. Применяется для свёрл, развёрток, метчиков, плашек и ножей; стойкая к отпуску при умеренной теплостойкости."
+    },
+    {
+      "id": "gost-12x18n10t",
+      "name": "12Х18Н10Т",
+      "category": "коррозионностойкая",
+      "standards": {
+        "aisi": "321",
+        "din_en": "X6CrNiTi18-10 (1.4541)",
+        "gost": "12Х18Н10Т",
+        "jis": "SUS321"
+      },
+      "chemical_composition": {
+        "C": {
+          "min": null,
+          "max": 0.12
+        },
+        "Cr": {
+          "min": 17.0,
+          "max": 19.0
+        },
+        "Mo": {
+          "min": null,
+          "max": null
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": null,
+          "max": 2.0
+        },
+        "Si": {
+          "min": null,
+          "max": 0.8
+        },
+        "Ni": {
+          "min": 9.0,
+          "max": 11.0
+        },
+        "Ti": {
+          "min": 0.4,
+          "max": 0.8
+        },
+        "P": {
+          "min": null,
+          "max": 0.035
+        },
+        "S": {
+          "min": null,
+          "max": 0.02
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.3
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": null,
+          "max": null
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 179
+        },
+        "tensile_strength_mpa": 510,
+        "yield_strength_mpa": 196,
+        "elongation_percent": 40,
+        "impact_toughness_j_cm2": null
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.92,
+        "thermal_conductivity_w_mk": 15
+      },
+      "description": "Аустенитная хромоникелевая нержавеющая сталь, стабилизированная титаном (аналог AISI 321). Стойка к межкристаллитной коррозии, работает в диапазоне от криогенных температур до +600 C; широко применяется в химической, пищевой и атомной промышленности."
+    },
+    {
+      "id": "gost-st3",
+      "name": "Ст3",
+      "category": "конструкционная углеродистая",
+      "standards": {
+        "aisi": "A283 Gr.C",
+        "din_en": "S235JR (1.0038)",
+        "gost": "Ст3",
+        "jis": "SS400"
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 0.14,
+          "max": 0.22
+        },
+        "Cr": {
+          "min": null,
+          "max": 0.3
+        },
+        "Mo": {
+          "min": null,
+          "max": null
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": 0.4,
+          "max": 0.65
+        },
+        "Si": {
+          "min": 0.15,
+          "max": 0.3
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.3
+        },
+        "P": {
+          "min": null,
+          "max": 0.04
+        },
+        "S": {
+          "min": null,
+          "max": 0.05
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.3
+        },
+        "As": {
+          "min": null,
+          "max": 0.08
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": null,
+          "max": null
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 131
+        },
+        "tensile_strength_mpa": 380,
+        "yield_strength_mpa": 245,
+        "elongation_percent": 26,
+        "impact_toughness_j_cm2": null
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.85,
+        "thermal_conductivity_w_mk": 54
+      },
+      "description": "Углеродистая сталь обыкновенного качества, спокойная (Ст3сп) — основная марка строительных металлоконструкций, профильного проката, труб; хорошо сваривается."
+    },
+    {
+      "id": "gost-st5",
+      "name": "Ст5",
+      "category": "конструкционная углеродистая",
+      "standards": {
+        "aisi": "A283 Gr.D",
+        "din_en": "E295 (1.0050)",
+        "gost": "Ст5",
+        "jis": "SS490"
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 0.28,
+          "max": 0.37
+        },
+        "Cr": {
+          "min": null,
+          "max": 0.3
+        },
+        "Mo": {
+          "min": null,
+          "max": null
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": 0.5,
+          "max": 0.8
+        },
+        "Si": {
+          "min": 0.15,
+          "max": 0.3
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.3
+        },
+        "P": {
+          "min": null,
+          "max": 0.04
+        },
+        "S": {
+          "min": null,
+          "max": 0.05
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.3
+        },
+        "As": {
+          "min": null,
+          "max": 0.08
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": null,
+          "max": null
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": null
+        },
+        "tensile_strength_mpa": 490,
+        "yield_strength_mpa": 285,
+        "elongation_percent": 20,
+        "impact_toughness_j_cm2": null
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.85,
+        "thermal_conductivity_w_mk": 51
+      },
+      "description": "Углеродистая сталь обыкновенного качества повышенной прочности. Применяется для слабонагруженных деталей машиностроения, рельсовых накладок, болтов, гаек."
+    },
+    {
+      "id": "gost-st10",
+      "name": "Сталь 10",
+      "category": "конструкционная углеродистая",
+      "standards": {
+        "aisi": "1010",
+        "din_en": "C10E (1.1121)",
+        "gost": "10",
+        "jis": "S10C"
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 0.07,
+          "max": 0.14
+        },
+        "Cr": {
+          "min": null,
+          "max": 0.15
+        },
+        "Mo": {
+          "min": null,
+          "max": null
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": 0.35,
+          "max": 0.65
+        },
+        "Si": {
+          "min": 0.17,
+          "max": 0.37
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.3
+        },
+        "P": {
+          "min": null,
+          "max": 0.035
+        },
+        "S": {
+          "min": null,
+          "max": 0.04
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.3
+        },
+        "As": {
+          "min": null,
+          "max": 0.08
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": null,
+          "max": null
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 143
+        },
+        "tensile_strength_mpa": 335,
+        "yield_strength_mpa": 205,
+        "elongation_percent": 31,
+        "impact_toughness_j_cm2": null
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.856,
+        "thermal_conductivity_w_mk": 64
+      },
+      "description": "Низкоуглеродистая качественная сталь. Применяется для штампованных и цементируемых деталей: пальцев, осей, втулок, толкателей, рычагов; хорошо сваривается."
+    },
+    {
+      "id": "gost-st15",
+      "name": "Сталь 15",
+      "category": "конструкционная углеродистая",
+      "standards": {
+        "aisi": "1015",
+        "din_en": "C15E (1.1141)",
+        "gost": "15",
+        "jis": "S15C"
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 0.12,
+          "max": 0.19
+        },
+        "Cr": {
+          "min": null,
+          "max": 0.25
+        },
+        "Mo": {
+          "min": null,
+          "max": null
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": 0.35,
+          "max": 0.65
+        },
+        "Si": {
+          "min": 0.17,
+          "max": 0.37
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.3
+        },
+        "P": {
+          "min": null,
+          "max": 0.035
+        },
+        "S": {
+          "min": null,
+          "max": 0.04
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.3
+        },
+        "As": {
+          "min": null,
+          "max": 0.08
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": null,
+          "max": null
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 149
+        },
+        "tensile_strength_mpa": 375,
+        "yield_strength_mpa": 225,
+        "elongation_percent": 27,
+        "impact_toughness_j_cm2": null
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.85,
+        "thermal_conductivity_w_mk": 54
+      },
+      "description": "Низкоуглеродистая качественная сталь для цементируемых деталей небольшого размера: кулачков, малонагруженных шестерён, копиров, втулок."
+    },
+    {
+      "id": "gost-st25",
+      "name": "Сталь 25",
+      "category": "конструкционная углеродистая",
+      "standards": {
+        "aisi": "1025",
+        "din_en": "C25E (1.1158)",
+        "gost": "25",
+        "jis": "S25C"
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 0.22,
+          "max": 0.3
+        },
+        "Cr": {
+          "min": null,
+          "max": 0.25
+        },
+        "Mo": {
+          "min": null,
+          "max": null
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": 0.5,
+          "max": 0.8
+        },
+        "Si": {
+          "min": 0.17,
+          "max": 0.37
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.3
+        },
+        "P": {
+          "min": null,
+          "max": 0.035
+        },
+        "S": {
+          "min": null,
+          "max": 0.04
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.3
+        },
+        "As": {
+          "min": null,
+          "max": 0.08
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": null,
+          "max": null
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 170
+        },
+        "tensile_strength_mpa": 450,
+        "yield_strength_mpa": 275,
+        "elongation_percent": 23,
+        "impact_toughness_j_cm2": null
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.82,
+        "thermal_conductivity_w_mk": 50
+      },
+      "description": "Малоуглеродистая качественная сталь общего машиностроения. Применяется для осей, валиков, болтов, шпинделей, маховиков, цементируемых деталей."
+    },
+    {
+      "id": "gost-st30",
+      "name": "Сталь 30",
+      "category": "конструкционная углеродистая",
+      "standards": {
+        "aisi": "1030",
+        "din_en": "C30E (1.1178)",
+        "gost": "30",
+        "jis": "S30C"
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 0.27,
+          "max": 0.35
+        },
+        "Cr": {
+          "min": null,
+          "max": 0.25
+        },
+        "Mo": {
+          "min": null,
+          "max": null
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": 0.5,
+          "max": 0.8
+        },
+        "Si": {
+          "min": 0.17,
+          "max": 0.37
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.3
+        },
+        "P": {
+          "min": null,
+          "max": 0.035
+        },
+        "S": {
+          "min": null,
+          "max": 0.04
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.3
+        },
+        "As": {
+          "min": null,
+          "max": 0.08
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": null,
+          "max": null
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 179
+        },
+        "tensile_strength_mpa": 490,
+        "yield_strength_mpa": 295,
+        "elongation_percent": 21,
+        "impact_toughness_j_cm2": null
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.82,
+        "thermal_conductivity_w_mk": 50
+      },
+      "description": "Среднеуглеродистая качественная сталь. Применяется для тяг, цапф, шатунов, осей, болтов, валов; нормализуется или подвергается улучшению."
+    },
+    {
+      "id": "gost-st35",
+      "name": "Сталь 35",
+      "category": "конструкционная углеродистая",
+      "standards": {
+        "aisi": "1035",
+        "din_en": "C35E (1.1181)",
+        "gost": "35",
+        "jis": "S35C"
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 0.32,
+          "max": 0.4
+        },
+        "Cr": {
+          "min": null,
+          "max": 0.25
+        },
+        "Mo": {
+          "min": null,
+          "max": null
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": 0.5,
+          "max": 0.8
+        },
+        "Si": {
+          "min": 0.17,
+          "max": 0.37
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.3
+        },
+        "P": {
+          "min": null,
+          "max": 0.035
+        },
+        "S": {
+          "min": null,
+          "max": 0.04
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.3
+        },
+        "As": {
+          "min": null,
+          "max": 0.08
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": null,
+          "max": null
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 187
+        },
+        "tensile_strength_mpa": 530,
+        "yield_strength_mpa": 315,
+        "elongation_percent": 20,
+        "impact_toughness_j_cm2": null
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.826,
+        "thermal_conductivity_w_mk": 49
+      },
+      "description": "Среднеуглеродистая качественная сталь. Применяется для деталей невысокой прочности: коленчатых валов, осей, шпинделей, втулок, шайб, болтов."
+    },
+    {
+      "id": "gost-st40",
+      "name": "Сталь 40",
+      "category": "конструкционная углеродистая",
+      "standards": {
+        "aisi": "1040",
+        "din_en": "C40E (1.1186)",
+        "gost": "40",
+        "jis": "S40C"
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 0.37,
+          "max": 0.45
+        },
+        "Cr": {
+          "min": null,
+          "max": 0.25
+        },
+        "Mo": {
+          "min": null,
+          "max": null
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": 0.5,
+          "max": 0.8
+        },
+        "Si": {
+          "min": 0.17,
+          "max": 0.37
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.3
+        },
+        "P": {
+          "min": null,
+          "max": 0.035
+        },
+        "S": {
+          "min": null,
+          "max": 0.04
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.3
+        },
+        "As": {
+          "min": null,
+          "max": 0.08
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": null,
+          "max": null
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 217
+        },
+        "tensile_strength_mpa": 580,
+        "yield_strength_mpa": 335,
+        "elongation_percent": 19,
+        "impact_toughness_j_cm2": null
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.85,
+        "thermal_conductivity_w_mk": 48
+      },
+      "description": "Среднеуглеродистая сталь для нормализованных и улучшаемых деталей: труб, поковок, дисков, валов, штоков, плунжеров; поверхностно закаливается."
+    },
+    {
+      "id": "gost-st50",
+      "name": "Сталь 50",
+      "category": "конструкционная углеродистая",
+      "standards": {
+        "aisi": "1050",
+        "din_en": "C50E (1.1206)",
+        "gost": "50",
+        "jis": "S50C"
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 0.47,
+          "max": 0.55
+        },
+        "Cr": {
+          "min": null,
+          "max": 0.25
+        },
+        "Mo": {
+          "min": null,
+          "max": null
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": 0.5,
+          "max": 0.8
+        },
+        "Si": {
+          "min": 0.17,
+          "max": 0.37
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.3
+        },
+        "P": {
+          "min": null,
+          "max": 0.035
+        },
+        "S": {
+          "min": null,
+          "max": 0.04
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.3
+        },
+        "As": {
+          "min": null,
+          "max": 0.08
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": null,
+          "max": null
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 217
+        },
+        "tensile_strength_mpa": 640,
+        "yield_strength_mpa": 375,
+        "elongation_percent": 14,
+        "impact_toughness_j_cm2": null
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.81,
+        "thermal_conductivity_w_mk": 47
+      },
+      "description": "Среднеуглеродистая сталь повышенной прочности. Применяется для зубчатых колёс, валков прокатных станов, бандажей, штоков, шпинделей; принимает поверхностную закалку."
+    },
+    {
+      "id": "gost-st60",
+      "name": "Сталь 60",
+      "category": "конструкционная углеродистая",
+      "standards": {
+        "aisi": "1060",
+        "din_en": "C60E (1.1221)",
+        "gost": "60",
+        "jis": "S58C"
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 0.57,
+          "max": 0.65
+        },
+        "Cr": {
+          "min": null,
+          "max": 0.25
+        },
+        "Mo": {
+          "min": null,
+          "max": null
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": 0.5,
+          "max": 0.8
+        },
+        "Si": {
+          "min": 0.17,
+          "max": 0.37
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.25
+        },
+        "P": {
+          "min": null,
+          "max": 0.035
+        },
+        "S": {
+          "min": null,
+          "max": 0.04
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.25
+        },
+        "As": {
+          "min": null,
+          "max": 0.08
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": null,
+          "max": null
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 229
+        },
+        "tensile_strength_mpa": 690,
+        "yield_strength_mpa": 410,
+        "elongation_percent": 12,
+        "impact_toughness_j_cm2": null
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.81,
+        "thermal_conductivity_w_mk": 46
+      },
+      "description": "Высокоуглеродистая сталь для деталей повышенной прочности и износостойкости: дисков сцепления, шпинделей, эксцентриков, прокатных валков, пружин."
+    },
+    {
+      "id": "gost-20x",
+      "name": "20Х",
+      "category": "конструкционная легированная",
+      "standards": {
+        "aisi": "5120",
+        "din_en": "20Cr4 (1.7027)",
+        "gost": "20Х",
+        "jis": "SCr420"
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 0.17,
+          "max": 0.23
+        },
+        "Cr": {
+          "min": 0.7,
+          "max": 1.0
+        },
+        "Mo": {
+          "min": null,
+          "max": null
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": 0.5,
+          "max": 0.8
+        },
+        "Si": {
+          "min": 0.17,
+          "max": 0.37
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.3
+        },
+        "P": {
+          "min": null,
+          "max": 0.035
+        },
+        "S": {
+          "min": null,
+          "max": 0.035
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.3
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": null,
+          "max": null
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 179
+        },
+        "tensile_strength_mpa": 780,
+        "yield_strength_mpa": 635,
+        "elongation_percent": 11,
+        "impact_toughness_j_cm2": 59
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.82,
+        "thermal_conductivity_w_mk": 43
+      },
+      "description": "Хромистая цементируемая сталь. Применяется для шестерён, червяков, поршневых пальцев, кулачковых муфт и других деталей с твёрдой поверхностью и вязкой сердцевиной."
+    },
+    {
+      "id": "gost-30x",
+      "name": "30Х",
+      "category": "конструкционная легированная",
+      "standards": {
+        "aisi": "5130",
+        "din_en": "28Cr4 (1.7030)",
+        "gost": "30Х",
+        "jis": "SCr430"
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 0.24,
+          "max": 0.32
+        },
+        "Cr": {
+          "min": 0.8,
+          "max": 1.1
+        },
+        "Mo": {
+          "min": null,
+          "max": null
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": 0.5,
+          "max": 0.8
+        },
+        "Si": {
+          "min": 0.17,
+          "max": 0.37
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.3
+        },
+        "P": {
+          "min": null,
+          "max": 0.035
+        },
+        "S": {
+          "min": null,
+          "max": 0.035
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.3
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": null,
+          "max": null
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 187
+        },
+        "tensile_strength_mpa": 880,
+        "yield_strength_mpa": 685,
+        "elongation_percent": 11,
+        "impact_toughness_j_cm2": 59
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.82,
+        "thermal_conductivity_w_mk": 42
+      },
+      "description": "Хромистая улучшаемая сталь. Применяется для осей, болтов, штоков, втулок, валов и других малонагруженных деталей машиностроения."
+    },
+    {
+      "id": "gost-45x",
+      "name": "45Х",
+      "category": "конструкционная легированная",
+      "standards": {
+        "aisi": "5145",
+        "din_en": "41Cr4 (1.7035)",
+        "gost": "45Х",
+        "jis": "SCr445"
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 0.41,
+          "max": 0.49
+        },
+        "Cr": {
+          "min": 0.8,
+          "max": 1.1
+        },
+        "Mo": {
+          "min": null,
+          "max": null
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": 0.5,
+          "max": 0.8
+        },
+        "Si": {
+          "min": 0.17,
+          "max": 0.37
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.3
+        },
+        "P": {
+          "min": null,
+          "max": 0.035
+        },
+        "S": {
+          "min": null,
+          "max": 0.035
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.3
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": null,
+          "max": null
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 229
+        },
+        "tensile_strength_mpa": 1030,
+        "yield_strength_mpa": 835,
+        "elongation_percent": 9,
+        "impact_toughness_j_cm2": 39
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.82,
+        "thermal_conductivity_w_mk": 41
+      },
+      "description": "Хромистая улучшаемая сталь повышенной прочности. Применяется для шпинделей, шестерён, валов, плунжеров и других деталей с поверхностной закалкой ТВЧ."
+    },
+    {
+      "id": "gost-50x",
+      "name": "50Х",
+      "category": "конструкционная легированная",
+      "standards": {
+        "aisi": "5150",
+        "din_en": "50Cr4",
+        "gost": "50Х",
+        "jis": "SCr450"
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 0.46,
+          "max": 0.54
+        },
+        "Cr": {
+          "min": 0.8,
+          "max": 1.1
+        },
+        "Mo": {
+          "min": null,
+          "max": null
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": 0.5,
+          "max": 0.8
+        },
+        "Si": {
+          "min": 0.17,
+          "max": 0.37
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.3
+        },
+        "P": {
+          "min": null,
+          "max": 0.035
+        },
+        "S": {
+          "min": null,
+          "max": 0.035
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.3
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": null,
+          "max": null
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 229
+        },
+        "tensile_strength_mpa": 1080,
+        "yield_strength_mpa": 885,
+        "elongation_percent": 9,
+        "impact_toughness_j_cm2": 39
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.82,
+        "thermal_conductivity_w_mk": 40
+      },
+      "description": "Среднеуглеродистая хромистая сталь высокой прочности и износостойкости. Применяется для зубчатых колёс, шпинделей, валов, штоков, прокатных валков с поверхностной закалкой."
+    },
+    {
+      "id": "gost-18hgt",
+      "name": "18ХГТ",
+      "category": "конструкционная легированная",
+      "standards": {
+        "aisi": "5115 (близкий)",
+        "din_en": "21MnCr5 (1.7147)",
+        "gost": "18ХГТ",
+        "jis": "SMnC420"
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 0.17,
+          "max": 0.23
+        },
+        "Cr": {
+          "min": 1.0,
+          "max": 1.3
+        },
+        "Mo": {
+          "min": null,
+          "max": null
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": 0.8,
+          "max": 1.1
+        },
+        "Si": {
+          "min": 0.17,
+          "max": 0.37
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.3
+        },
+        "Ti": {
+          "min": 0.03,
+          "max": 0.09
+        },
+        "P": {
+          "min": null,
+          "max": 0.035
+        },
+        "S": {
+          "min": null,
+          "max": 0.035
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.3
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": null,
+          "max": null
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 217
+        },
+        "tensile_strength_mpa": 980,
+        "yield_strength_mpa": 885,
+        "elongation_percent": 9,
+        "impact_toughness_j_cm2": 78
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.8,
+        "thermal_conductivity_w_mk": 38
+      },
+      "description": "Хромомарганцовая цементируемая сталь, легированная титаном для измельчения зерна. Широко применяется для шестерён коробок передач, валов, шлицевых соединений, кулачковых муфт."
+    },
+    {
+      "id": "gost-25hgt",
+      "name": "25ХГТ",
+      "category": "конструкционная легированная",
+      "standards": {
+        "aisi": null,
+        "din_en": "25CrMnTi (близкий)",
+        "gost": "25ХГТ",
+        "jis": null
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 0.22,
+          "max": 0.29
+        },
+        "Cr": {
+          "min": 1.0,
+          "max": 1.3
+        },
+        "Mo": {
+          "min": null,
+          "max": null
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": 0.8,
+          "max": 1.1
+        },
+        "Si": {
+          "min": 0.17,
+          "max": 0.37
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.3
+        },
+        "Ti": {
+          "min": 0.03,
+          "max": 0.09
+        },
+        "P": {
+          "min": null,
+          "max": 0.035
+        },
+        "S": {
+          "min": null,
+          "max": 0.035
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.3
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": null,
+          "max": null
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 217
+        },
+        "tensile_strength_mpa": 1180,
+        "yield_strength_mpa": 980,
+        "elongation_percent": 10,
+        "impact_toughness_j_cm2": 78
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.8,
+        "thermal_conductivity_w_mk": 38
+      },
+      "description": "Хромомарганцовая цементируемая сталь, упрочняемая титаном. Применяется для тяжелонагруженных шестерён, валов-шестерён, толкателей, фрикционных муфт."
+    },
+    {
+      "id": "gost-20hn",
+      "name": "20ХН",
+      "category": "конструкционная легированная",
+      "standards": {
+        "aisi": "3120 (близкий)",
+        "din_en": "20NiCr4",
+        "gost": "20ХН",
+        "jis": null
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 0.17,
+          "max": 0.23
+        },
+        "Cr": {
+          "min": 0.45,
+          "max": 0.75
+        },
+        "Mo": {
+          "min": null,
+          "max": null
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": 0.4,
+          "max": 0.7
+        },
+        "Si": {
+          "min": 0.17,
+          "max": 0.37
+        },
+        "Ni": {
+          "min": 1.0,
+          "max": 1.4
+        },
+        "P": {
+          "min": null,
+          "max": 0.035
+        },
+        "S": {
+          "min": null,
+          "max": 0.035
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.3
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": null,
+          "max": null
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 197
+        },
+        "tensile_strength_mpa": 785,
+        "yield_strength_mpa": 590,
+        "elongation_percent": 14,
+        "impact_toughness_j_cm2": 78
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.85,
+        "thermal_conductivity_w_mk": 41
+      },
+      "description": "Хромоникелевая цементируемая сталь повышенной вязкости. Применяется для шестерён, валов, втулок, поршневых пальцев и других деталей, работающих при ударных нагрузках."
+    },
+    {
+      "id": "gost-40hn",
+      "name": "40ХН",
+      "category": "конструкционная легированная",
+      "standards": {
+        "aisi": "3140",
+        "din_en": "40NiCr6",
+        "gost": "40ХН",
+        "jis": "SNC236"
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 0.36,
+          "max": 0.44
+        },
+        "Cr": {
+          "min": 0.45,
+          "max": 0.75
+        },
+        "Mo": {
+          "min": null,
+          "max": null
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": 0.5,
+          "max": 0.8
+        },
+        "Si": {
+          "min": 0.17,
+          "max": 0.37
+        },
+        "Ni": {
+          "min": 1.0,
+          "max": 1.4
+        },
+        "P": {
+          "min": null,
+          "max": 0.035
+        },
+        "S": {
+          "min": null,
+          "max": 0.035
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.3
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": null,
+          "max": null
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 207
+        },
+        "tensile_strength_mpa": 980,
+        "yield_strength_mpa": 785,
+        "elongation_percent": 11,
+        "impact_toughness_j_cm2": 69
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.82,
+        "thermal_conductivity_w_mk": 40
+      },
+      "description": "Хромоникелевая улучшаемая сталь повышенной прокаливаемости. Применяется для коленчатых валов, шатунов, шестерён, валов-шестерён, осей, нагруженных болтовых соединений."
+    },
+    {
+      "id": "gost-12hn3a",
+      "name": "12ХН3А",
+      "category": "конструкционная легированная",
+      "standards": {
+        "aisi": "9310 (близкий)",
+        "din_en": "14NiCr14",
+        "gost": "12ХН3А",
+        "jis": "SNC815"
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 0.09,
+          "max": 0.16
+        },
+        "Cr": {
+          "min": 0.6,
+          "max": 0.9
+        },
+        "Mo": {
+          "min": null,
+          "max": null
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": 0.3,
+          "max": 0.6
+        },
+        "Si": {
+          "min": 0.17,
+          "max": 0.37
+        },
+        "Ni": {
+          "min": 2.75,
+          "max": 3.15
+        },
+        "P": {
+          "min": null,
+          "max": 0.025
+        },
+        "S": {
+          "min": null,
+          "max": 0.025
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.3
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": null,
+          "max": null
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 217
+        },
+        "tensile_strength_mpa": 930,
+        "yield_strength_mpa": 685,
+        "elongation_percent": 11,
+        "impact_toughness_j_cm2": 88
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.85,
+        "thermal_conductivity_w_mk": 36
+      },
+      "description": "Хромоникелевая высоковязкая цементируемая сталь. Применяется для тяжелонагруженных шестерён, валов, осей, шатунов; работает при ударных нагрузках и низких температурах."
+    },
+    {
+      "id": "gost-20hn3a",
+      "name": "20ХН3А",
+      "category": "конструкционная легированная",
+      "standards": {
+        "aisi": "3320 (близкий)",
+        "din_en": null,
+        "gost": "20ХН3А",
+        "jis": null
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 0.17,
+          "max": 0.24
+        },
+        "Cr": {
+          "min": 0.6,
+          "max": 0.9
+        },
+        "Mo": {
+          "min": null,
+          "max": null
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": 0.3,
+          "max": 0.6
+        },
+        "Si": {
+          "min": 0.17,
+          "max": 0.37
+        },
+        "Ni": {
+          "min": 2.75,
+          "max": 3.15
+        },
+        "P": {
+          "min": null,
+          "max": 0.025
+        },
+        "S": {
+          "min": null,
+          "max": 0.025
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.3
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": null,
+          "max": null
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 217
+        },
+        "tensile_strength_mpa": 930,
+        "yield_strength_mpa": 735,
+        "elongation_percent": 12,
+        "impact_toughness_j_cm2": 108
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.85,
+        "thermal_conductivity_w_mk": 36
+      },
+      "description": "Хромоникелевая высокопрочная цементируемая сталь. Применяется для крупных деталей, требующих высокой вязкости сердцевины: шестерён, валов, осей, фланцев."
+    },
+    {
+      "id": "gost-38hs",
+      "name": "38ХС",
+      "category": "конструкционная легированная",
+      "standards": {
+        "aisi": null,
+        "din_en": "37CrSi",
+        "gost": "38ХС",
+        "jis": null
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 0.34,
+          "max": 0.42
+        },
+        "Cr": {
+          "min": 1.3,
+          "max": 1.6
+        },
+        "Mo": {
+          "min": null,
+          "max": null
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": 0.3,
+          "max": 0.6
+        },
+        "Si": {
+          "min": 1.0,
+          "max": 1.4
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.3
+        },
+        "P": {
+          "min": null,
+          "max": 0.035
+        },
+        "S": {
+          "min": null,
+          "max": 0.035
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.3
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": null,
+          "max": null
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 255
+        },
+        "tensile_strength_mpa": 980,
+        "yield_strength_mpa": 785,
+        "elongation_percent": 12,
+        "impact_toughness_j_cm2": 59
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.85,
+        "thermal_conductivity_w_mk": 39
+      },
+      "description": "Хромокремнистая улучшаемая сталь повышенной прочности. Применяется для валов, осей, шатунов, штоков и других ответственных нагруженных деталей."
+    },
+    {
+      "id": "gost-35hgsa",
+      "name": "35ХГСА",
+      "category": "конструкционная легированная",
+      "standards": {
+        "aisi": null,
+        "din_en": "36CrMnSi",
+        "gost": "35ХГСА",
+        "jis": null
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 0.32,
+          "max": 0.39
+        },
+        "Cr": {
+          "min": 1.1,
+          "max": 1.4
+        },
+        "Mo": {
+          "min": null,
+          "max": null
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": 0.8,
+          "max": 1.1
+        },
+        "Si": {
+          "min": 1.1,
+          "max": 1.4
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.3
+        },
+        "P": {
+          "min": null,
+          "max": 0.025
+        },
+        "S": {
+          "min": null,
+          "max": 0.025
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.3
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": null,
+          "max": null
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 229
+        },
+        "tensile_strength_mpa": 1620,
+        "yield_strength_mpa": 1275,
+        "elongation_percent": 9,
+        "impact_toughness_j_cm2": 39
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.85,
+        "thermal_conductivity_w_mk": 38
+      },
+      "description": "Хромансиль повышенной прочности (до 1600 МПа после изотермической закалки). Используется в авиастроении и машиностроении для ответственных силовых деталей."
+    },
+    {
+      "id": "gost-30hma",
+      "name": "30ХМА",
+      "category": "конструкционная легированная",
+      "standards": {
+        "aisi": "4130",
+        "din_en": "25CrMo4 (1.7218)",
+        "gost": "30ХМА",
+        "jis": "SCM430"
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 0.26,
+          "max": 0.34
+        },
+        "Cr": {
+          "min": 0.8,
+          "max": 1.1
+        },
+        "Mo": {
+          "min": 0.15,
+          "max": 0.25
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": 0.4,
+          "max": 0.7
+        },
+        "Si": {
+          "min": 0.17,
+          "max": 0.37
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.3
+        },
+        "P": {
+          "min": null,
+          "max": 0.025
+        },
+        "S": {
+          "min": null,
+          "max": 0.025
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.3
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": null,
+          "max": null
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 229
+        },
+        "tensile_strength_mpa": 930,
+        "yield_strength_mpa": 735,
+        "elongation_percent": 12,
+        "impact_toughness_j_cm2": 88
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.83,
+        "thermal_conductivity_w_mk": 41
+      },
+      "description": "Хромомолибденовая улучшаемая сталь, теплостойкая до 450–500 °C. Применяется для валов, осей, шестерён, болтов и трубопроводов высокого давления."
+    },
+    {
+      "id": "gost-35hm",
+      "name": "35ХМ",
+      "category": "конструкционная легированная",
+      "standards": {
+        "aisi": "4135",
+        "din_en": "34CrMo4 (1.7220)",
+        "gost": "35ХМ",
+        "jis": "SCM435"
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 0.32,
+          "max": 0.4
+        },
+        "Cr": {
+          "min": 0.8,
+          "max": 1.1
+        },
+        "Mo": {
+          "min": 0.15,
+          "max": 0.25
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": 0.4,
+          "max": 0.7
+        },
+        "Si": {
+          "min": 0.17,
+          "max": 0.37
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.3
+        },
+        "P": {
+          "min": null,
+          "max": 0.035
+        },
+        "S": {
+          "min": null,
+          "max": 0.035
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.3
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": null,
+          "max": null
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 241
+        },
+        "tensile_strength_mpa": 930,
+        "yield_strength_mpa": 735,
+        "elongation_percent": 12,
+        "impact_toughness_j_cm2": 78
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.83,
+        "thermal_conductivity_w_mk": 41
+      },
+      "description": "Хромомолибденовая улучшаемая сталь высокой прокаливаемости. Применяется для крупных нагруженных деталей: валов турбин, шестерён, фланцев, шпилек, болтов."
+    },
+    {
+      "id": "gost-40hn2ma",
+      "name": "40ХН2МА",
+      "category": "конструкционная легированная",
+      "standards": {
+        "aisi": "4340",
+        "din_en": "36NiCrMo16 (близкий)",
+        "gost": "40ХН2МА",
+        "jis": "SNCM439"
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 0.37,
+          "max": 0.44
+        },
+        "Cr": {
+          "min": 0.6,
+          "max": 0.9
+        },
+        "Mo": {
+          "min": 0.15,
+          "max": 0.25
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": 0.5,
+          "max": 0.8
+        },
+        "Si": {
+          "min": 0.17,
+          "max": 0.37
+        },
+        "Ni": {
+          "min": 1.25,
+          "max": 1.65
+        },
+        "P": {
+          "min": null,
+          "max": 0.025
+        },
+        "S": {
+          "min": null,
+          "max": 0.025
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.3
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": null,
+          "max": null
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 269
+        },
+        "tensile_strength_mpa": 1080,
+        "yield_strength_mpa": 930,
+        "elongation_percent": 12,
+        "impact_toughness_j_cm2": 78
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.85,
+        "thermal_conductivity_w_mk": 35
+      },
+      "description": "Хромоникельмолибденовая сталь высокой прокаливаемости и прочности (аналог 4340). Применяется для тяжелонагруженных валов, шатунов, роторов турбин, авиадеталей."
+    },
+    {
+      "id": "gost-38h2myua",
+      "name": "38Х2МЮА",
+      "category": "конструкционная легированная",
+      "standards": {
+        "aisi": "A355 Class B",
+        "din_en": "41CrAlMo7 (1.8509)",
+        "gost": "38Х2МЮА",
+        "jis": "SACM645"
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 0.35,
+          "max": 0.42
+        },
+        "Cr": {
+          "min": 1.35,
+          "max": 1.65
+        },
+        "Mo": {
+          "min": 0.15,
+          "max": 0.25
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": 0.3,
+          "max": 0.6
+        },
+        "Si": {
+          "min": 0.2,
+          "max": 0.45
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.3
+        },
+        "Al": {
+          "min": 0.7,
+          "max": 1.1
+        },
+        "P": {
+          "min": null,
+          "max": 0.025
+        },
+        "S": {
+          "min": null,
+          "max": 0.025
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.3
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": null,
+          "max": null
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 229
+        },
+        "tensile_strength_mpa": 980,
+        "yield_strength_mpa": 835,
+        "elongation_percent": 14,
+        "impact_toughness_j_cm2": 88
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.65,
+        "thermal_conductivity_w_mk": 39
+      },
+      "description": "Азотируемая сталь с алюминием для получения сверхтвёрдой поверхности (HV 800–1100). Применяется для гильз цилиндров, шпинделей, плунжеров, шестерён, червяков точных станков."
+    },
+    {
+      "id": "gost-18h2n4ma",
+      "name": "18Х2Н4МА",
+      "category": "конструкционная легированная",
+      "standards": {
+        "aisi": null,
+        "din_en": "18CrNiMo7-6 (близкий)",
+        "gost": "18Х2Н4МА",
+        "jis": null
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 0.14,
+          "max": 0.2
+        },
+        "Cr": {
+          "min": 1.35,
+          "max": 1.65
+        },
+        "Mo": {
+          "min": 0.3,
+          "max": 0.4
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": 0.25,
+          "max": 0.55
+        },
+        "Si": {
+          "min": 0.17,
+          "max": 0.37
+        },
+        "Ni": {
+          "min": 4.0,
+          "max": 4.4
+        },
+        "P": {
+          "min": null,
+          "max": 0.025
+        },
+        "S": {
+          "min": null,
+          "max": 0.025
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.3
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": null,
+          "max": null
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 269
+        },
+        "tensile_strength_mpa": 1130,
+        "yield_strength_mpa": 835,
+        "elongation_percent": 12,
+        "impact_toughness_j_cm2": 98
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.85,
+        "thermal_conductivity_w_mk": 33
+      },
+      "description": "Высокопрочная хромоникельмолибденовая сталь повышенной прокаливаемости. Применяется для тяжелонагруженных валов, шестерён больших сечений, ответственных болтов авиатехники."
+    },
+    {
+      "id": "gost-60s2a",
+      "name": "60С2А",
+      "category": "рессорно-пружинная",
+      "standards": {
+        "aisi": "9260",
+        "din_en": "60SiCr7 (1.7108)",
+        "gost": "60С2А",
+        "jis": "SUP6"
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 0.58,
+          "max": 0.63
+        },
+        "Cr": {
+          "min": null,
+          "max": 0.3
+        },
+        "Mo": {
+          "min": null,
+          "max": null
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": 0.6,
+          "max": 0.9
+        },
+        "Si": {
+          "min": 1.6,
+          "max": 2.0
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.25
+        },
+        "P": {
+          "min": null,
+          "max": 0.025
+        },
+        "S": {
+          "min": null,
+          "max": 0.025
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.2
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": null,
+          "max": null
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 285
+        },
+        "tensile_strength_mpa": 1570,
+        "yield_strength_mpa": 1370,
+        "elongation_percent": 6,
+        "impact_toughness_j_cm2": null
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.85,
+        "thermal_conductivity_w_mk": 36
+      },
+      "description": "Кремнистая рессорно-пружинная сталь высшего качества. Применяется для тяжелонагруженных рессор, пружин, торсионов автомобилей, тракторов и подвижного состава."
+    },
+    {
+      "id": "gost-50hfa",
+      "name": "50ХФА",
+      "category": "рессорно-пружинная",
+      "standards": {
+        "aisi": "6150",
+        "din_en": "51CrV4 (1.8159)",
+        "gost": "50ХФА",
+        "jis": "SUP10"
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 0.46,
+          "max": 0.54
+        },
+        "Cr": {
+          "min": 0.8,
+          "max": 1.1
+        },
+        "Mo": {
+          "min": null,
+          "max": null
+        },
+        "V": {
+          "min": 0.1,
+          "max": 0.2
+        },
+        "Mn": {
+          "min": 0.5,
+          "max": 0.8
+        },
+        "Si": {
+          "min": 0.17,
+          "max": 0.37
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.25
+        },
+        "P": {
+          "min": null,
+          "max": 0.025
+        },
+        "S": {
+          "min": null,
+          "max": 0.025
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.2
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": null,
+          "max": null
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 285
+        },
+        "tensile_strength_mpa": 1275,
+        "yield_strength_mpa": 1080,
+        "elongation_percent": 8,
+        "impact_toughness_j_cm2": null
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.83,
+        "thermal_conductivity_w_mk": 35
+      },
+      "description": "Хромованадиевая пружинная сталь повышенной прокаливаемости и теплостойкости. Применяется для пружин и рессор, работающих при повышенных температурах и переменных нагрузках."
+    },
+    {
+      "id": "gost-60s2ha",
+      "name": "60С2ХА",
+      "category": "рессорно-пружинная",
+      "standards": {
+        "aisi": null,
+        "din_en": "60SiCr7 (близкий)",
+        "gost": "60С2ХА",
+        "jis": null
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 0.56,
+          "max": 0.64
+        },
+        "Cr": {
+          "min": 0.7,
+          "max": 1.0
+        },
+        "Mo": {
+          "min": null,
+          "max": null
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": 0.4,
+          "max": 0.7
+        },
+        "Si": {
+          "min": 1.4,
+          "max": 1.8
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.25
+        },
+        "P": {
+          "min": null,
+          "max": 0.025
+        },
+        "S": {
+          "min": null,
+          "max": 0.025
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.2
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": null,
+          "max": null
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 285
+        },
+        "tensile_strength_mpa": 1765,
+        "yield_strength_mpa": 1570,
+        "elongation_percent": 5,
+        "impact_toughness_j_cm2": null
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.83,
+        "thermal_conductivity_w_mk": 35
+      },
+      "description": "Высококачественная кремнехромистая пружинная сталь повышенной прокаливаемости. Применяется для тяжелонагруженных рессор, пружинных колец, шайб."
+    },
+    {
+      "id": "gost-70s3a",
+      "name": "70С3А",
+      "category": "рессорно-пружинная",
+      "standards": {
+        "aisi": null,
+        "din_en": null,
+        "gost": "70С3А",
+        "jis": null
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 0.66,
+          "max": 0.74
+        },
+        "Cr": {
+          "min": null,
+          "max": 0.3
+        },
+        "Mo": {
+          "min": null,
+          "max": null
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": 0.4,
+          "max": 0.6
+        },
+        "Si": {
+          "min": 2.4,
+          "max": 2.8
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.25
+        },
+        "P": {
+          "min": null,
+          "max": 0.025
+        },
+        "S": {
+          "min": null,
+          "max": 0.025
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.2
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": null,
+          "max": null
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 302
+        },
+        "tensile_strength_mpa": 1765,
+        "yield_strength_mpa": 1665,
+        "elongation_percent": 5,
+        "impact_toughness_j_cm2": null
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.8,
+        "thermal_conductivity_w_mk": null
+      },
+      "description": "Кремнистая пружинная сталь с повышенным содержанием кремния, обеспечивающим высокую упругость. Применяется для рессор автомобилей, торсионов, пружин повышенной упругости."
+    },
+    {
+      "id": "gost-shh15",
+      "name": "ШХ15",
+      "category": "подшипниковая",
+      "standards": {
+        "aisi": "52100",
+        "din_en": "100Cr6 (1.3505)",
+        "gost": "ШХ15",
+        "jis": "SUJ2"
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 0.95,
+          "max": 1.05
+        },
+        "Cr": {
+          "min": 1.3,
+          "max": 1.65
+        },
+        "Mo": {
+          "min": null,
+          "max": null
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": 0.2,
+          "max": 0.4
+        },
+        "Si": {
+          "min": 0.17,
+          "max": 0.37
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.3
+        },
+        "P": {
+          "min": null,
+          "max": 0.027
+        },
+        "S": {
+          "min": null,
+          "max": 0.02
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.25
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": 60,
+          "max": 66
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 207
+        },
+        "tensile_strength_mpa": 590,
+        "yield_strength_mpa": 410,
+        "elongation_percent": 20,
+        "impact_toughness_j_cm2": null
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.812,
+        "thermal_conductivity_w_mk": 40
+      },
+      "description": "Высокоуглеродистая хромистая подшипниковая сталь — мировой стандарт для шарикоподшипников и роликоподшипников. Применяется также для калибров, плашек, режущего и измерительного инструмента."
+    },
+    {
+      "id": "gost-shh15sg",
+      "name": "ШХ15СГ",
+      "category": "подшипниковая",
+      "standards": {
+        "aisi": null,
+        "din_en": "100CrMnSi6-4 (1.3520)",
+        "gost": "ШХ15СГ",
+        "jis": null
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 0.95,
+          "max": 1.05
+        },
+        "Cr": {
+          "min": 1.3,
+          "max": 1.65
+        },
+        "Mo": {
+          "min": null,
+          "max": null
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": 0.9,
+          "max": 1.2
+        },
+        "Si": {
+          "min": 0.4,
+          "max": 0.65
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.3
+        },
+        "P": {
+          "min": null,
+          "max": 0.027
+        },
+        "S": {
+          "min": null,
+          "max": 0.02
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.25
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": 60,
+          "max": 65
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 217
+        },
+        "tensile_strength_mpa": null,
+        "yield_strength_mpa": null,
+        "elongation_percent": null,
+        "impact_toughness_j_cm2": null
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.81,
+        "thermal_conductivity_w_mk": 40
+      },
+      "description": "Подшипниковая сталь с повышенным содержанием марганца и кремния — повышенная прокаливаемость. Применяется для подшипников больших сечений: роликов, колец крупногабаритных подшипников."
+    },
+    {
+      "id": "gost-u7",
+      "name": "У7",
+      "category": "инструментальная углеродистая",
+      "standards": {
+        "aisi": "W107",
+        "din_en": "C70W2 (1.1520)",
+        "gost": "У7",
+        "jis": "SK7"
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 0.65,
+          "max": 0.74
+        },
+        "Cr": {
+          "min": null,
+          "max": 0.2
+        },
+        "Mo": {
+          "min": null,
+          "max": null
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": 0.17,
+          "max": 0.28
+        },
+        "Si": {
+          "min": 0.17,
+          "max": 0.33
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.25
+        },
+        "P": {
+          "min": null,
+          "max": 0.03
+        },
+        "S": {
+          "min": null,
+          "max": 0.028
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.25
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": 56,
+          "max": 60
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 187
+        },
+        "tensile_strength_mpa": null,
+        "yield_strength_mpa": null,
+        "elongation_percent": null,
+        "impact_toughness_j_cm2": null
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.83,
+        "thermal_conductivity_w_mk": null
+      },
+      "description": "Углеродистая инструментальная сталь повышенной вязкости. Применяется для инструмента, работающего с ударными нагрузками: зубил, кузнечных штампов, молотков, бородков, кернеров, топоров."
+    },
+    {
+      "id": "gost-u9",
+      "name": "У9",
+      "category": "инструментальная углеродистая",
+      "standards": {
+        "aisi": "W109",
+        "din_en": "C90W3 (1.1525)",
+        "gost": "У9",
+        "jis": "SK6"
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 0.85,
+          "max": 0.94
+        },
+        "Cr": {
+          "min": null,
+          "max": 0.2
+        },
+        "Mo": {
+          "min": null,
+          "max": null
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": 0.17,
+          "max": 0.33
+        },
+        "Si": {
+          "min": 0.17,
+          "max": 0.33
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.25
+        },
+        "P": {
+          "min": null,
+          "max": 0.03
+        },
+        "S": {
+          "min": null,
+          "max": 0.028
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.25
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": 60,
+          "max": 63
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 192
+        },
+        "tensile_strength_mpa": null,
+        "yield_strength_mpa": null,
+        "elongation_percent": null,
+        "impact_toughness_j_cm2": null
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.83,
+        "thermal_conductivity_w_mk": null
+      },
+      "description": "Углеродистая инструментальная сталь. Применяется для инструмента, требующего высокой твёрдости при умеренной вязкости: матриц, пуансонов, кернеров, отвёрток, столярного инструмента."
+    },
+    {
+      "id": "gost-u12",
+      "name": "У12",
+      "category": "инструментальная углеродистая",
+      "standards": {
+        "aisi": "W112",
+        "din_en": "C125W (1.1663)",
+        "gost": "У12",
+        "jis": "SK2"
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 1.15,
+          "max": 1.24
+        },
+        "Cr": {
+          "min": null,
+          "max": 0.2
+        },
+        "Mo": {
+          "min": null,
+          "max": null
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": 0.17,
+          "max": 0.28
+        },
+        "Si": {
+          "min": 0.17,
+          "max": 0.33
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.25
+        },
+        "P": {
+          "min": null,
+          "max": 0.03
+        },
+        "S": {
+          "min": null,
+          "max": 0.028
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.25
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": 62,
+          "max": 64
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 207
+        },
+        "tensile_strength_mpa": null,
+        "yield_strength_mpa": null,
+        "elongation_percent": null,
+        "impact_toughness_j_cm2": null
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.81,
+        "thermal_conductivity_w_mk": null
+      },
+      "description": "Высокоуглеродистая инструментальная сталь высокой твёрдости и износостойкости. Применяется для напильников, шаберов, бритв, гравировочного инструмента, мерительных плиток."
+    },
+    {
+      "id": "gost-hvg",
+      "name": "ХВГ",
+      "category": "инструментальная легированная",
+      "standards": {
+        "aisi": "O1 (близкий)",
+        "din_en": "105WCr6 (1.2419)",
+        "gost": "ХВГ",
+        "jis": "SKS31"
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 0.9,
+          "max": 1.05
+        },
+        "Cr": {
+          "min": 0.9,
+          "max": 1.2
+        },
+        "Mo": {
+          "min": null,
+          "max": null
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "W": {
+          "min": 1.2,
+          "max": 1.6
+        },
+        "Mn": {
+          "min": 0.8,
+          "max": 1.1
+        },
+        "Si": {
+          "min": 0.1,
+          "max": 0.4
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.35
+        },
+        "P": {
+          "min": null,
+          "max": 0.03
+        },
+        "S": {
+          "min": null,
+          "max": 0.03
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.3
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": 62,
+          "max": 65
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 255
+        },
+        "tensile_strength_mpa": null,
+        "yield_strength_mpa": null,
+        "elongation_percent": null,
+        "impact_toughness_j_cm2": null
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.85,
+        "thermal_conductivity_w_mk": null
+      },
+      "description": "Хромовольфрамовая инструментальная сталь малой деформации при закалке. Применяется для протяжек, разверток, длинных метчиков, калибров, точного измерительного инструмента."
+    },
+    {
+      "id": "gost-5hnm",
+      "name": "5ХНМ",
+      "category": "инструментальная легированная",
+      "standards": {
+        "aisi": "L6",
+        "din_en": "55NiCrMoV7 (1.2714)",
+        "gost": "5ХНМ",
+        "jis": "SKT4"
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 0.5,
+          "max": 0.6
+        },
+        "Cr": {
+          "min": 0.5,
+          "max": 0.8
+        },
+        "Mo": {
+          "min": 0.15,
+          "max": 0.3
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": 0.5,
+          "max": 0.8
+        },
+        "Si": {
+          "min": 0.1,
+          "max": 0.4
+        },
+        "Ni": {
+          "min": 1.4,
+          "max": 1.8
+        },
+        "P": {
+          "min": null,
+          "max": 0.03
+        },
+        "S": {
+          "min": null,
+          "max": 0.03
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.3
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": 36,
+          "max": 44
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 241
+        },
+        "tensile_strength_mpa": null,
+        "yield_strength_mpa": null,
+        "elongation_percent": null,
+        "impact_toughness_j_cm2": null
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.83,
+        "thermal_conductivity_w_mk": 36
+      },
+      "description": "Штамповая сталь горячего деформирования высокой вязкости. Применяется для крупных молотовых штампов, прессовых вставок, ножей горячей резки металла."
+    },
+    {
+      "id": "gost-4h5mfs",
+      "name": "4Х5МФС",
+      "category": "инструментальная легированная",
+      "standards": {
+        "aisi": "H13 (близкий)",
+        "din_en": "X40CrMoV5-1 (1.2344)",
+        "gost": "4Х5МФС",
+        "jis": "SKD61"
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 0.32,
+          "max": 0.4
+        },
+        "Cr": {
+          "min": 4.5,
+          "max": 5.5
+        },
+        "Mo": {
+          "min": 1.2,
+          "max": 1.5
+        },
+        "V": {
+          "min": 0.3,
+          "max": 0.5
+        },
+        "Mn": {
+          "min": 0.2,
+          "max": 0.5
+        },
+        "Si": {
+          "min": 0.9,
+          "max": 1.2
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.35
+        },
+        "P": {
+          "min": null,
+          "max": 0.03
+        },
+        "S": {
+          "min": null,
+          "max": 0.03
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.3
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": 48,
+          "max": 53
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 241
+        },
+        "tensile_strength_mpa": null,
+        "yield_strength_mpa": null,
+        "elongation_percent": null,
+        "impact_toughness_j_cm2": null
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.8,
+        "thermal_conductivity_w_mk": 27
+      },
+      "description": "Штамповая хромомолибденованадиевая сталь горячего деформирования (аналог H13). Применяется для пресс-форм литья под давлением, штампов горячей штамповки, ножей горячей резки, мундштуков."
+    },
+    {
+      "id": "gost-h12",
+      "name": "Х12",
+      "category": "инструментальная легированная",
+      "standards": {
+        "aisi": "D3",
+        "din_en": "X210Cr12 (1.2080)",
+        "gost": "Х12",
+        "jis": "SKD1"
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 2.0,
+          "max": 2.2
+        },
+        "Cr": {
+          "min": 11.5,
+          "max": 13.0
+        },
+        "Mo": {
+          "min": null,
+          "max": null
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": 0.15,
+          "max": 0.45
+        },
+        "Si": {
+          "min": 0.1,
+          "max": 0.4
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.35
+        },
+        "P": {
+          "min": null,
+          "max": 0.03
+        },
+        "S": {
+          "min": null,
+          "max": 0.03
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.3
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": 60,
+          "max": 64
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 255
+        },
+        "tensile_strength_mpa": null,
+        "yield_strength_mpa": null,
+        "elongation_percent": null,
+        "impact_toughness_j_cm2": null
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.7,
+        "thermal_conductivity_w_mk": null
+      },
+      "description": "Высокохромистая штамповая сталь холодного деформирования (аналог D3). Применяется для штампов, накатных роликов, волок, гибочных пуансонов; даёт минимальное изменение размеров при закалке."
+    },
+    {
+      "id": "gost-h12f1",
+      "name": "Х12Ф1",
+      "category": "инструментальная легированная",
+      "standards": {
+        "aisi": "D3-mod",
+        "din_en": "X210CrW12 (близкий)",
+        "gost": "Х12Ф1",
+        "jis": null
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 1.25,
+          "max": 1.45
+        },
+        "Cr": {
+          "min": 11.0,
+          "max": 12.5
+        },
+        "Mo": {
+          "min": null,
+          "max": null
+        },
+        "V": {
+          "min": 0.7,
+          "max": 0.9
+        },
+        "Mn": {
+          "min": 0.15,
+          "max": 0.45
+        },
+        "Si": {
+          "min": 0.1,
+          "max": 0.4
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.35
+        },
+        "P": {
+          "min": null,
+          "max": 0.03
+        },
+        "S": {
+          "min": null,
+          "max": 0.03
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.3
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": 60,
+          "max": 63
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 255
+        },
+        "tensile_strength_mpa": null,
+        "yield_strength_mpa": null,
+        "elongation_percent": null,
+        "impact_toughness_j_cm2": null
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.7,
+        "thermal_conductivity_w_mk": null
+      },
+      "description": "Высокохромистая ванадиевая штамповая сталь холодного деформирования. Применяется для волок, накатных роликов, разделительных штампов, профилирующих роликов; износостойка."
+    },
+    {
+      "id": "gost-r6m5",
+      "name": "Р6М5",
+      "category": "быстрорежущая",
+      "standards": {
+        "aisi": "M2",
+        "din_en": "HS6-5-2C (1.3343)",
+        "gost": "Р6М5",
+        "jis": "SKH51"
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 0.82,
+          "max": 0.9
+        },
+        "Cr": {
+          "min": 3.8,
+          "max": 4.4
+        },
+        "Mo": {
+          "min": 4.8,
+          "max": 5.3
+        },
+        "V": {
+          "min": 1.7,
+          "max": 2.1
+        },
+        "W": {
+          "min": 5.5,
+          "max": 6.5
+        },
+        "Mn": {
+          "min": null,
+          "max": 0.5
+        },
+        "Si": {
+          "min": null,
+          "max": 0.5
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.4
+        },
+        "Co": {
+          "min": null,
+          "max": 0.5
+        },
+        "P": {
+          "min": null,
+          "max": 0.03
+        },
+        "S": {
+          "min": null,
+          "max": 0.03
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.25
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": 63,
+          "max": 65
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 255
+        },
+        "tensile_strength_mpa": null,
+        "yield_strength_mpa": null,
+        "elongation_percent": null,
+        "impact_toughness_j_cm2": null
+      },
+      "physical_properties": {
+        "density_g_cm3": 8.15,
+        "thermal_conductivity_w_mk": 24
+      },
+      "description": "Самая распространённая быстрорежущая сталь общего назначения (аналог M2). Применяется для свёрл, метчиков, фрез, развёрток, протяжек; теплостойкость до 600 °C."
+    },
+    {
+      "id": "gost-r18",
+      "name": "Р18",
+      "category": "быстрорежущая",
+      "standards": {
+        "aisi": "T1",
+        "din_en": "HS18-0-1 (1.3355)",
+        "gost": "Р18",
+        "jis": "SKH2"
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 0.73,
+          "max": 0.83
+        },
+        "Cr": {
+          "min": 3.8,
+          "max": 4.4
+        },
+        "Mo": {
+          "min": null,
+          "max": 1.0
+        },
+        "V": {
+          "min": 1.0,
+          "max": 1.4
+        },
+        "W": {
+          "min": 17.0,
+          "max": 18.5
+        },
+        "Mn": {
+          "min": null,
+          "max": 0.5
+        },
+        "Si": {
+          "min": null,
+          "max": 0.5
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.4
+        },
+        "Co": {
+          "min": null,
+          "max": 0.5
+        },
+        "P": {
+          "min": null,
+          "max": 0.03
+        },
+        "S": {
+          "min": null,
+          "max": 0.03
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.25
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": 62,
+          "max": 65
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 255
+        },
+        "tensile_strength_mpa": null,
+        "yield_strength_mpa": null,
+        "elongation_percent": null,
+        "impact_toughness_j_cm2": null
+      },
+      "physical_properties": {
+        "density_g_cm3": 8.75,
+        "thermal_conductivity_w_mk": 26
+      },
+      "description": "Классическая вольфрамовая быстрорежущая сталь (аналог T1). Применяется для фасонных режущих инструментов: свёрл, метчиков, протяжек, фрез, шеверов; теплостойкость до 620 °C."
+    },
+    {
+      "id": "gost-r6m5k5",
+      "name": "Р6М5К5",
+      "category": "быстрорежущая",
+      "standards": {
+        "aisi": "M35",
+        "din_en": "HS6-5-2-5 (1.3243)",
+        "gost": "Р6М5К5",
+        "jis": "SKH55"
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 0.84,
+          "max": 0.92
+        },
+        "Cr": {
+          "min": 3.8,
+          "max": 4.3
+        },
+        "Mo": {
+          "min": 4.8,
+          "max": 5.3
+        },
+        "V": {
+          "min": 1.7,
+          "max": 2.1
+        },
+        "W": {
+          "min": 6.0,
+          "max": 7.0
+        },
+        "Co": {
+          "min": 4.7,
+          "max": 5.2
+        },
+        "Mn": {
+          "min": null,
+          "max": 0.5
+        },
+        "Si": {
+          "min": null,
+          "max": 0.5
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.4
+        },
+        "P": {
+          "min": null,
+          "max": 0.03
+        },
+        "S": {
+          "min": null,
+          "max": 0.03
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.25
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": 64,
+          "max": 66
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 269
+        },
+        "tensile_strength_mpa": null,
+        "yield_strength_mpa": null,
+        "elongation_percent": null,
+        "impact_toughness_j_cm2": null
+      },
+      "physical_properties": {
+        "density_g_cm3": 8.2,
+        "thermal_conductivity_w_mk": 25
+      },
+      "description": "Кобальтовая быстрорежущая сталь повышенной производительности (аналог M35). Применяется для обработки труднообрабатываемых сплавов: жаропрочных, нержавеющих, титановых; теплостойкость до 640 °C."
+    },
+    {
+      "id": "gost-08h18n10",
+      "name": "08Х18Н10",
+      "category": "коррозионностойкая",
+      "standards": {
+        "aisi": "304",
+        "din_en": "X5CrNi18-10 (1.4301)",
+        "gost": "08Х18Н10",
+        "jis": "SUS304"
+      },
+      "chemical_composition": {
+        "C": {
+          "min": null,
+          "max": 0.08
+        },
+        "Cr": {
+          "min": 17.0,
+          "max": 19.0
+        },
+        "Mo": {
+          "min": null,
+          "max": null
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": null,
+          "max": 2.0
+        },
+        "Si": {
+          "min": null,
+          "max": 0.8
+        },
+        "Ni": {
+          "min": 9.0,
+          "max": 11.0
+        },
+        "P": {
+          "min": null,
+          "max": 0.035
+        },
+        "S": {
+          "min": null,
+          "max": 0.02
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.3
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": null,
+          "max": null
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 179
+        },
+        "tensile_strength_mpa": 515,
+        "yield_strength_mpa": 205,
+        "elongation_percent": 40,
+        "impact_toughness_j_cm2": null
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.9,
+        "thermal_conductivity_w_mk": 16
+      },
+      "description": "Аустенитная хромоникелевая нержавеющая сталь (мировой стандарт AISI 304). Применяется в пищевой, химической, медицинской промышленности; немагнитна, отлично сваривается."
+    },
+    {
+      "id": "gost-08h18n10t",
+      "name": "08Х18Н10Т",
+      "category": "коррозионностойкая",
+      "standards": {
+        "aisi": "321",
+        "din_en": "X6CrNiTi18-10 (1.4541)",
+        "gost": "08Х18Н10Т",
+        "jis": "SUS321"
+      },
+      "chemical_composition": {
+        "C": {
+          "min": null,
+          "max": 0.08
+        },
+        "Cr": {
+          "min": 17.0,
+          "max": 19.0
+        },
+        "Mo": {
+          "min": null,
+          "max": null
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": null,
+          "max": 2.0
+        },
+        "Si": {
+          "min": null,
+          "max": 0.8
+        },
+        "Ni": {
+          "min": 9.0,
+          "max": 11.0
+        },
+        "Ti": {
+          "min": 0.4,
+          "max": 0.7
+        },
+        "P": {
+          "min": null,
+          "max": 0.035
+        },
+        "S": {
+          "min": null,
+          "max": 0.02
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.3
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": null,
+          "max": null
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 179
+        },
+        "tensile_strength_mpa": 510,
+        "yield_strength_mpa": 205,
+        "elongation_percent": 38,
+        "impact_toughness_j_cm2": null
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.9,
+        "thermal_conductivity_w_mk": 16
+      },
+      "description": "Аустенитная хромоникелевая сталь, стабилизированная титаном (аналог AISI 321). Стойка к межкристаллитной коррозии в околосварных зонах; для химической, нефтегазовой и пищевой промышленности."
+    },
+    {
+      "id": "gost-12h13",
+      "name": "12Х13",
+      "category": "коррозионностойкая",
+      "standards": {
+        "aisi": "410",
+        "din_en": "X12Cr13 (1.4006)",
+        "gost": "12Х13",
+        "jis": "SUS410"
+      },
+      "chemical_composition": {
+        "C": {
+          "min": null,
+          "max": 0.15
+        },
+        "Cr": {
+          "min": 12.0,
+          "max": 14.0
+        },
+        "Mo": {
+          "min": null,
+          "max": null
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": null,
+          "max": 0.8
+        },
+        "Si": {
+          "min": null,
+          "max": 0.8
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.6
+        },
+        "P": {
+          "min": null,
+          "max": 0.03
+        },
+        "S": {
+          "min": null,
+          "max": 0.025
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.3
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": null,
+          "max": null
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 187
+        },
+        "tensile_strength_mpa": 590,
+        "yield_strength_mpa": 410,
+        "elongation_percent": 20,
+        "impact_toughness_j_cm2": 88
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.72,
+        "thermal_conductivity_w_mk": 25
+      },
+      "description": "Мартенситная нержавеющая сталь (AISI 410). Применяется для лопаток турбин, болтов, гаек, осей, винтов, деталей внутренней арматуры паровых котлов и турбин."
+    },
+    {
+      "id": "gost-20h13",
+      "name": "20Х13",
+      "category": "коррозионностойкая",
+      "standards": {
+        "aisi": "420",
+        "din_en": "X20Cr13 (1.4021)",
+        "gost": "20Х13",
+        "jis": "SUS420J1"
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 0.16,
+          "max": 0.25
+        },
+        "Cr": {
+          "min": 12.0,
+          "max": 14.0
+        },
+        "Mo": {
+          "min": null,
+          "max": null
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": null,
+          "max": 0.8
+        },
+        "Si": {
+          "min": null,
+          "max": 0.8
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.6
+        },
+        "P": {
+          "min": null,
+          "max": 0.03
+        },
+        "S": {
+          "min": null,
+          "max": 0.025
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.3
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": 48,
+          "max": 50
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 197
+        },
+        "tensile_strength_mpa": 650,
+        "yield_strength_mpa": 440,
+        "elongation_percent": 16,
+        "impact_toughness_j_cm2": 59
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.67,
+        "thermal_conductivity_w_mk": 25
+      },
+      "description": "Мартенситная нержавеющая сталь повышенной прочности (AISI 420). Применяется для лопаток паровых турбин, клапанов, болтов, штоков, корпусов клапанов, деталей насосов."
+    },
+    {
+      "id": "gost-40h13",
+      "name": "40Х13",
+      "category": "коррозионностойкая",
+      "standards": {
+        "aisi": "420HC",
+        "din_en": "X45CrMoV15 (близкий 1.4034)",
+        "gost": "40Х13",
+        "jis": "SUS420J2"
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 0.36,
+          "max": 0.45
+        },
+        "Cr": {
+          "min": 12.0,
+          "max": 14.0
+        },
+        "Mo": {
+          "min": null,
+          "max": null
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": null,
+          "max": 0.8
+        },
+        "Si": {
+          "min": null,
+          "max": 0.8
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.6
+        },
+        "P": {
+          "min": null,
+          "max": 0.03
+        },
+        "S": {
+          "min": null,
+          "max": 0.025
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.3
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": 52,
+          "max": 56
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 229
+        },
+        "tensile_strength_mpa": 880,
+        "yield_strength_mpa": 635,
+        "elongation_percent": 12,
+        "impact_toughness_j_cm2": null
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.65,
+        "thermal_conductivity_w_mk": 25
+      },
+      "description": "Мартенситная высокоуглеродистая нержавеющая сталь (аналог 420HC). Применяется для медицинского и хирургического инструмента, бытовых ножей, пружин, валов, режущего инструмента."
+    },
+    {
+      "id": "gost-10h17n13m2t",
+      "name": "10Х17Н13М2Т",
+      "category": "коррозионностойкая",
+      "standards": {
+        "aisi": "316Ti",
+        "din_en": "X6CrNiMoTi17-12-2 (1.4571)",
+        "gost": "10Х17Н13М2Т",
+        "jis": "SUS316Ti"
+      },
+      "chemical_composition": {
+        "C": {
+          "min": null,
+          "max": 0.1
+        },
+        "Cr": {
+          "min": 16.0,
+          "max": 18.0
+        },
+        "Mo": {
+          "min": 2.0,
+          "max": 3.0
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": null,
+          "max": 2.0
+        },
+        "Si": {
+          "min": null,
+          "max": 0.8
+        },
+        "Ni": {
+          "min": 12.0,
+          "max": 14.0
+        },
+        "Ti": {
+          "min": 0.3,
+          "max": 0.6
+        },
+        "P": {
+          "min": null,
+          "max": 0.035
+        },
+        "S": {
+          "min": null,
+          "max": 0.02
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.3
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": null,
+          "max": null
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 200
+        },
+        "tensile_strength_mpa": 530,
+        "yield_strength_mpa": 220,
+        "elongation_percent": 40,
+        "impact_toughness_j_cm2": null
+      },
+      "physical_properties": {
+        "density_g_cm3": 8.0,
+        "thermal_conductivity_w_mk": 15
+      },
+      "description": "Аустенитная хромоникельмолибденовая сталь со стабилизирующим титаном (аналог AISI 316Ti). Стойка к питтинговой и щелевой коррозии в кислых и хлоридных средах; для химического и нефтегазового оборудования."
+    }
+  ]
+}
