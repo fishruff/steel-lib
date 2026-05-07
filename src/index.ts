@@ -79,10 +79,6 @@ export const steels: Steel[] = db.steels;
 export const getSteel = (name: string): Steel | undefined =>
     steels.find((s) => s.name === name);
 
-const avg = (r: MinMax): number => {
-    if (r.min !== null && r.max !== null) return (r.min + r.max) / 2;
-    return r.min ?? r.max ?? 0;
-};
 
 const compareRange = (a: MinMax, b: MinMax): number => {
     if (a.min === null || a.max === null || b.min === null || b.max === null) return 0;
@@ -97,14 +93,12 @@ const compareRange = (a: MinMax, b: MinMax): number => {
 };
 
 const calculateSimilarity = (a: Steel, b: Steel) => {
-    const Cdiff = compareRange(a.chemical_composition.C, b.chemical_composition.C);
-    const Mndiff = Math.abs(avg(a.chemical_composition.Mn) - avg(b.chemical_composition.Mn));
     const ay = a.mechanical_properties.yield_strength_mpa ?? 0;
     const by = b.mechanical_properties.yield_strength_mpa ?? 0;
     const Yielddiff = Math.abs(ay - by);
 
-    const Csim = 1 - Cdiff / 1;
-    const Mnsim = 1 - Mndiff / 2;
+    const Csim = compareRange(a.chemical_composition.C, b.chemical_composition.C);
+    const Mnsim =compareRange(a.chemical_composition.Mn, b.chemical_composition.Mn);
     const Yieldsim = 1 - Yielddiff / 1000;
 
     const similarity =
@@ -114,7 +108,7 @@ const calculateSimilarity = (a: Steel, b: Steel) => {
 
     return {
         similarity,
-        details: { Cdiff, Mndiff, Yielddiff },
+        details: { Csim, Mnsim, Yielddiff },
     };
 };
 
