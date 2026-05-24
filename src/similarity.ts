@@ -1,5 +1,5 @@
-import type { ChemicalComposition, MinMax, Steel } from "./types";
-import { getSteel, steels } from "./db";
+import type { ChemicalComposition, MinMax, Steel } from "./types.js";
+import { getSteel, steels } from "./db.js";
 
 /**
  * =========================

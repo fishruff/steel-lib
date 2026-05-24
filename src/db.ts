@@ -1,5 +1,5 @@
-import rawData from "./steels_base.json";
-import type { Steel, SteelDatabase } from "./types";
+import rawData from "./steels_base.json" with { type: "json" };
+import type { Steel, SteelDatabase } from "./types.js";
 
 /**
  * =========================

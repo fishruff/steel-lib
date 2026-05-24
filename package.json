@@ -1,15 +1,46 @@
 {
   "name": "steel-lib",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "version": "0.1.0",
+  "description": "Engine для сравнения и подбора аналогов марок сталей по ГОСТ. Поиск похожих марок, сравнение химического состава и механических свойств.",
+  "keywords": [
+    "steel",
+    "gost",
+    "metallurgy",
+    "similarity",
+    "alloy",
+    "стали",
+    "гост",
+    "металлургия"
+  ],
+  "homepage": "https://github.com/fishruff/steel-lib#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fishruff/steel-lib.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/fishruff/steel-lib/issues"
+  },
+  "author": "fishruff <arsershoff@gmail.com>",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./steels_base.json": "./dist/steels_base.json"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc && cp src/steels_base.json dist/steels_base.json",
+    "prepublishOnly": "npm run build"
+  },
   "devDependencies": {
     "typescript": "^6.0.3"
   }
