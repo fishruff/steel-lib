@@ -1,8 +1,14 @@
 # steel-lib
 
+[![npm version](https://img.shields.io/npm/v/steel-lib.svg)](https://www.npmjs.com/package/steel-lib)
+[![npm downloads](https://img.shields.io/npm/dm/steel-lib.svg)](https://www.npmjs.com/package/steel-lib)
+[![license](https://img.shields.io/npm/l/steel-lib.svg)](./LICENSE)
+
 > [English](./README.md)
 
 Движок для сравнения и подбора аналогов марок сталей по ГОСТ. Сравнивает химический состав и механические свойства, возвращает коэффициент похожести `[0, 1]`.
+
+> **npm:** [npmjs.com/package/steel-lib](https://www.npmjs.com/package/steel-lib)
 
 ## Установка
 

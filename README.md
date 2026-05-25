@@ -1,8 +1,14 @@
 # steel-lib
 
+[![npm version](https://img.shields.io/npm/v/steel-lib.svg)](https://www.npmjs.com/package/steel-lib)
+[![npm downloads](https://img.shields.io/npm/dm/steel-lib.svg)](https://www.npmjs.com/package/steel-lib)
+[![license](https://img.shields.io/npm/l/steel-lib.svg)](./LICENSE)
+
 > [Russian / Русский](./README.ru.md)
 
 Engine for comparing and finding analog steel grades by GOST standards. Compares chemical composition and mechanical properties, returns a similarity coefficient in `[0, 1]`.
+
+> **npm:** [npmjs.com/package/steel-lib](https://www.npmjs.com/package/steel-lib)
 
 ## Installation
 
