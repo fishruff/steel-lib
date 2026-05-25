@@ -38,6 +38,11 @@ console.log(similar?.slice(0, 3));
 const steel = getSteel("12Х18Н10Т");
 console.log(steel?.standards.aisi); // "321"
 console.log(steel?.chemical_composition.Cr); // { min: 17, max: 19 }
+
+// Найти ГОСТ-марку по зарубежному стандарту
+import { getSteelByStandard } from "steel-lib";
+const gostGrade = getSteelByStandard("304");
+console.log(gostGrade?.name); // "08Х18Н10"
 ```
 
 ## Сценарии использования
@@ -54,6 +59,7 @@ console.log(steel?.chemical_composition.Cr); // { min: 17, max: 19 }
 |---|---|
 | `getSteel(name: string)` | Найти марку по точному имени (`"Ст3"`, `"40Х"`, `"12Х18Н10Т"`) |
 | `getSteelById(id: string)` | Найти марку по id (`"gost-st3"`, `"gost-40x"`) |
+| `getSteelByStandard(code: string)` | Найти ГОСТ-марку по коду AISI/DIN-EN/JIS (`"304"`, `"D2"`, `"1.4541"`, `"SUS321"`) |
 | `steels: Steel[]` | Все марки в базе |
 
 ### Сравнение

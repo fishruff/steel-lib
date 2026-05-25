@@ -29,3 +29,40 @@ export const getSteel = (name: string): Steel | undefined =>
 /** Найти сталь по уникальному id (например "gost-st3", "gost-40x"). */
 export const getSteelById = (id: string): Steel | undefined =>
     steels.find((s) => s.id === id);
+
+/**
+ * Внутренний хелпер: проверяет совпадение запроса с обозначением по
+ * зарубежному стандарту. Учитывает варианты записи:
+ *   - точное совпадение ("304" === "304")
+ *   - первый токен ("5115" совпадает с "5115 (близкий)")
+ *   - часть в скобках ("1.4541" совпадает с "X6CrNiTi18-10 (1.4541)")
+ * Регистр игнорируется.
+ */
+const matchesStandard = (storedValue: string | null, query: string): boolean => {
+    if (!storedValue) return false;
+    const q = query.trim().toLowerCase();
+    const v = storedValue.trim().toLowerCase();
+
+    if (v === q) return true;
+
+    const firstToken = v.split(/[\s(]/)[0];
+    if (firstToken === q) return true;
+
+    const parenMatch = v.match(/\(([^)]+)\)/);
+    if (parenMatch && parenMatch[1].trim() === q) return true;
+
+    return false;
+};
+
+/**
+ * Найти сталь по обозначению зарубежного стандарта (AISI, DIN/EN, JIS).
+ * Примеры: "304" → 08Х18Н10, "D2" → Х12МФ, "1.4541" → 12Х18Н10Т, "SUS321" → 08Х18Н10Т.
+ * Возвращает первую найденную марку (если код встречается у нескольких — берётся первая в БД).
+ */
+export const getSteelByStandard = (name: string): Steel | undefined =>
+    steels.find(
+        (s) =>
+            matchesStandard(s.standards.aisi, name) ||
+            matchesStandard(s.standards.din_en, name) ||
+            matchesStandard(s.standards.jis, name),
+    );

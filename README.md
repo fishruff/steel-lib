@@ -38,6 +38,11 @@ console.log(similar?.slice(0, 3));
 const steel = getSteel("12Х18Н10Т");
 console.log(steel?.standards.aisi); // "321"
 console.log(steel?.chemical_composition.Cr); // { min: 17, max: 19 }
+
+// Find a GOST grade by foreign standard code
+import { getSteelByStandard } from "steel-lib";
+const gostGrade = getSteelByStandard("304");
+console.log(gostGrade?.name); // "08Х18Н10"
 ```
 
 ## Use cases
@@ -54,6 +59,7 @@ console.log(steel?.chemical_composition.Cr); // { min: 17, max: 19 }
 |---|---|
 | `getSteel(name: string)` | Find a grade by exact name (e.g., `"Ст3"`, `"40Х"`, `"12Х18Н10Т"`) |
 | `getSteelById(id: string)` | Find a grade by ID (e.g., `"gost-st3"`, `"gost-40x"`) |
+| `getSteelByStandard(code: string)` | Find a GOST grade by AISI/DIN-EN/JIS code (e.g., `"304"`, `"D2"`, `"1.4541"`, `"SUS321"`) |
 | `steels: Steel[]` | Full array of all grades in the database |
 
 ### Comparison

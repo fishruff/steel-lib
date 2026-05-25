@@ -3,6 +3,38 @@ import { getSteel, steels } from "./db.js";
 
 /**
  * =========================
+ * TUNING CONSTANTS
+ * =========================
+ * Все настройки алгоритма собраны здесь. Меняй значения тут, не в коде функций.
+ */
+
+/**
+ * Веса гибридной метрики `compareRange`:
+ *   OVERLAP — насколько диапазоны реально пересекаются (IoU-подобная мера)
+ *   CENTER  — насколько близки средние значения
+ * Сумма = 1. Текущие значения: overlap важнее центра.
+ */
+const COMPARE_RANGE_WEIGHTS = {
+    OVERLAP: 0.7,
+    CENTER: 0.3,
+};
+
+/**
+ * Максимальная "значимая" разница пределов текучести (МПа).
+ * Разница ≥ значения считается максимальной (similarity по yield = 0).
+ * Производное от разброса данных в БД: σт ~ 200..1700 МПа.
+ */
+const MAX_YIELD_DIFF_MPA = 800;
+
+/**
+ * Дефолтный вес для элементов, отсутствующих в `CHEMICAL_WEIGHTS`.
+ * Защищает от резкого скачка важности при добавлении нового элемента в БД:
+ * новый элемент получит умеренный вес вместо максимального.
+ */
+const DEFAULT_CHEMICAL_WEIGHT = 0.3;
+
+/**
+ * =========================
  * RANGE COMPARISON
  * =========================
  * Гибридная метрика похожести двух MinMax-диапазонов в [0..1]:
@@ -10,23 +42,24 @@ import { getSteel, steels } from "./db.js";
  *   0 — не пересекаются или нет данных
  *
  * Учитывает два компонента:
- *   overlapScore — доля пересечения от общего разброса (классическая IoU-метрика)
+ *   overlapScore — доля пересечения от общего разброса (IoU-подобная мера)
  *   centerScore  — близость центров (важно когда диапазоны узкие и смещены)
- * Веса 0.7/0.3 — пересечение важнее, центр корректирует.
  */
 export const compareRange = (a: MinMax, b: MinMax): number => {
     // Оба диапазона "Max X" (только верхняя граница) — типично для примесных
     // элементов (Cr/Cu/P/S у углеродистых сталей). Сравниваем верхние границы.
     if (a.min === null && b.min === null && a.max !== null && b.max !== null) {
+        if (a.max === 0 && b.max === 0) return 1;
         const diff = Math.abs(a.max - b.max);
-        const scale = Math.max(a.max, b.max) || 1;
+        const scale = Math.max(a.max, b.max);
         return 1 - Math.min(1, diff / scale);
     }
 
     // Оба диапазона "≥ X" (только нижняя граница) — редкий формат, но возможен.
     if (a.max === null && b.max === null && a.min !== null && b.min !== null) {
+        if (a.min === 0 && b.min === 0) return 1;
         const diff = Math.abs(a.min - b.min);
-        const scale = Math.max(a.min, b.min) || 1;
+        const scale = Math.max(a.min, b.min);
         return 1 - Math.min(1, diff / scale);
     }
 
@@ -52,7 +85,7 @@ export const compareRange = (a: MinMax, b: MinMax): number => {
     const centerDiff = Math.abs(aCenter - bCenter);
     const centerScore = 1 - Math.min(1, centerDiff / maxRange);
 
-    return overlapScore * 0.7 + centerScore * 0.3;
+    return overlapScore * COMPARE_RANGE_WEIGHTS.OVERLAP + centerScore * COMPARE_RANGE_WEIGHTS.CENTER;
 };
 
 /**
@@ -64,7 +97,7 @@ export const compareRange = (a: MinMax, b: MinMax): number => {
  * его вес не входит в totalWeight и итог нормализуется корректно.
  */
 export const WEIGHTS = {
-    chemistry: 0.85, // вся химия через compareChem (взвешено по chemicalWeights)
+    chemistry: 0.85, // вся химия через compareChem (взвешено по CHEMICAL_WEIGHTS)
     yield: 0.15, // механическая прочность (предел текучести)
 };
 
@@ -86,14 +119,7 @@ export const WEIGHTS = {
  *     — относительный вклад в прокаливаемость/свариваемость
  *   - PREN = Cr + 3.3·Mo + 16·N — относительное влияние на коррозию
  */
-/**
- * Дефолтный вес для элементов, отсутствующих в `chemicalWeights`.
- * Защищает от резкого скачка важности при добавлении нового элемента в БД:
- * новый элемент получит умеренный вес вместо максимального.
- */
-const DEFAULT_WEIGHT = 0.3;
-
-const chemicalWeights: Record<string, number> = {
+const CHEMICAL_WEIGHTS: Record<string, number> = {
     // Главные классификаторы (определяют тип стали)
     C:  1.0,   // углерод — основной классификатор (углеродистая/инструментальная)
     Cr: 0.9,   // хром — определяющий для нержавеек (≥13%) и легированных
@@ -143,8 +169,15 @@ export const compareChem = (a: Steel, b: Steel): number => {
         // Пропускаем опциональные элементы, отсутствующие у одной из сталей.
         if (!aValue || !bValue) continue;
 
+        // Пропускаем, если у обоих диапазон полностью null (нет данных в стандарте,
+        // типичный случай: Mo/V у углеродистых сталей). Иначе compareRange вернёт 0
+        // и протянет вниз итог даже при сравнении стали самой с собой.
+        const aEmpty = aValue.min === null && aValue.max === null;
+        const bEmpty = bValue.min === null && bValue.max === null;
+        if (aEmpty && bEmpty) continue;
+
         const sim = compareRange(aValue, bValue);
-        const weight = chemicalWeights[key] ?? DEFAULT_WEIGHT;
+        const weight = CHEMICAL_WEIGHTS[key] ?? DEFAULT_CHEMICAL_WEIGHT;
 
         sum += sim * weight;
         totalWeight += weight;
@@ -173,15 +206,14 @@ export const calculateSimilarity = (a: Steel, b: Steel) => {
     totalWeight += WEIGHTS.chemistry;
 
     // 2. Предел текучести — учитывается только при наличии у обеих марок.
-    // MAX_DIFF = 800 МПа: разница ≥800 считается "максимально различной".
+    // См. константу MAX_YIELD_DIFF_MPA вверху файла.
     let Ysim = 0;
     const ay = a.mechanical_properties.yield_strength_mpa;
     const by = b.mechanical_properties.yield_strength_mpa;
 
     if (ay !== null && by !== null) {
-        const MAX_DIFF = 800;
         const diff = Math.abs(ay - by);
-        Ysim = 1 - Math.min(1, diff / MAX_DIFF);
+        Ysim = 1 - Math.min(1, diff / MAX_YIELD_DIFF_MPA);
         score += Ysim * WEIGHTS.yield;
         totalWeight += WEIGHTS.yield;
     }

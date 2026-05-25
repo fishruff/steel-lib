@@ -39,9 +39,12 @@
   ],
   "scripts": {
     "build": "tsc && cp src/steels_base.json dist/steels_base.json",
+    "test": "vitest",
+    "test:run": "vitest run",
     "prepublishOnly": "npm run build"
   },
   "devDependencies": {
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.7"
   }
 }
