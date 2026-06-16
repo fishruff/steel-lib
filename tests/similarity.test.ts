@@ -6,6 +6,7 @@ import {
     compareSteel,
     findSimilar,
 } from "../src/similarity.js";
+import { explainSimilarity } from "../src/explain.js";
 import { getSteel, getSteelById, getSteelByStandard, steels } from "../src/db.js";
 
 /**
@@ -142,6 +143,15 @@ describe("calculateSimilarity", () => {
         expect(details).toHaveProperty("Ysim");
         expect(details).toHaveProperty("weights");
     });
+
+    // Snapshot-страховка: фиксирует итог для известной пары марок.
+    // Если сдвиг весов/алгоритма меняет это число — тест падает осознанно.
+    it("scores a known pair (Сталь 20 vs Сталь 45) at a stable value", () => {
+        const a = getSteel("Сталь 20")!;
+        const b = getSteel("Сталь 45")!;
+        const { similarity } = calculateSimilarity(a, b);
+        expect(similarity).toBeCloseTo(0.7179, 3);
+    });
 });
 
 /**
@@ -190,6 +200,15 @@ describe("findSimilar", () => {
     it("returns N-1 entries (where N is total grades)", () => {
         const result = findSimilar("Ст3")!;
         expect(result).toHaveLength(steels.length - 1);
+    });
+
+    // Регрессия: для рядовой углеродистой Ст3 ближайшими должны быть
+    // другие низкоуглеродистые конструкционные (Сталь 20 / Сталь 15),
+    // а не легированные/нержавеющие. Ловит «молчаливую» поломку весов.
+    it("ranks plain low-carbon grades highest for Ст3", () => {
+        const top3 = findSimilar("Ст3")!.slice(0, 3).map((r) => r.steel);
+        expect(top3[0]).toBe("Сталь 20");
+        expect(top3).toContain("Сталь 15");
     });
 });
 
@@ -270,6 +289,61 @@ describe("getSteelByStandard", () => {
 
     it("returns undefined for unknown standard code", () => {
         expect(getSteelByStandard("UnknownStandardCode")).toBeUndefined();
+    });
+});
+
+/**
+ * =========================
+ * explainSimilarity
+ * =========================
+ */
+describe("explainSimilarity", () => {
+    it("returns null when a grade is unknown", () => {
+        expect(explainSimilarity("nope", "Сталь 45")).toBeNull();
+        expect(explainSimilarity("Сталь 45", "nope")).toBeNull();
+    });
+
+    it("summary reflects the similarity percentage (ru by default)", () => {
+        const r = explainSimilarity("Сталь 20", "Сталь 45")!;
+        expect(r.summary).toBe("Похожи на 72%");
+    });
+
+    it("renders English summary and labels with { lang: 'en' }", () => {
+        const r = explainSimilarity("Сталь 20", "Сталь 45", { lang: "en" })!;
+        expect(r.summary).toBe("72% similar");
+        const carbon = r.factors.find((f) => f.key === "C")!;
+        expect(carbon.text).toContain("Carbon");
+    });
+
+    it("reports carbon delta with correct sign and raw values", () => {
+        const r = explainSimilarity("Сталь 20", "Сталь 45")!;
+        const carbon = r.factors.find((f) => f.key === "C")!;
+        expect(carbon.delta).toBeCloseTo(0.255, 3);
+        expect(carbon.delta).toBeCloseTo(carbon.b! - carbon.a!, 6);
+        expect(carbon.text).toBe("Углерод +0.255%");
+    });
+
+    it("marks identical elements as 'идентичен' (delta 0)", () => {
+        const r = explainSimilarity("Сталь 20", "Сталь 45")!;
+        const cr = r.factors.find((f) => f.key === "Cr")!;
+        expect(cr.delta).toBe(0);
+        expect(cr.text).toBe("Хром идентичен");
+    });
+
+    it("includes mechanical factors when both grades define them", () => {
+        const r = explainSimilarity("Сталь 20", "Сталь 45")!;
+        const yield_ = r.factors.find((f) => f.key === "σт")!;
+        expect(yield_.text).toBe("Предел текучести +110 МПа");
+    });
+
+    it("every factor carries text, a, b and delta", () => {
+        const r = explainSimilarity("40Х", "45Х")!;
+        expect(r.factors.length).toBeGreaterThan(0);
+        for (const f of r.factors) {
+            expect(typeof f.text).toBe("string");
+            expect(f.text.length).toBeGreaterThan(0);
+            expect(f.delta).toBeCloseTo(f.b! - f.a!, 6);
+        }
     });
 });
 
