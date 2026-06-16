@@ -43,6 +43,22 @@ console.log(steel?.chemical_composition.Cr); // { min: 17, max: 19 }
 import { getSteelByStandard } from "steel-lib";
 const gostGrade = getSteelByStandard("304");
 console.log(gostGrade?.name); // "08Х18Н10"
+
+// Explain why two grades are similar (ru by default, { lang: "en" } for English)
+import { explainSimilarity } from "steel-lib";
+const ex = explainSimilarity("Сталь 20", "Сталь 45");
+console.log(ex?.summary);     // "Похожи на 72%"
+console.log(ex?.factors[0]);  // { key: "C", a: 0.205, b: 0.46, delta: 0.255, text: "Углерод +0.255%" }
+
+// Select grades by spec (AND semantics, empty filter returns all)
+import { findBy } from "steel-lib";
+const weldable = findBy({ category: "конструкционная легированная", maxCarbon: 0.12 });
+const stainless = findBy({ minElement: { Cr: 12 } });
+
+// Chemistry metrics
+import { calcPREN, calcCEV } from "steel-lib";
+calcPREN(getSteel("10Х17Н13М2Т")!); // ~25.25 — pitting resistance (Cr + 3.3·Mo)
+calcCEV(getSteel("09Г2С")!);         // ~0.36 — carbon equivalent (weldability)
 ```
 
 ## Use cases
@@ -71,6 +87,25 @@ console.log(gostGrade?.name); // "08Х18Н10"
 | `compareChem(a, b)` | Compare chemical composition only (weighted average across elements) |
 | `compareRange(a, b)` | Compare two `{min, max}` ranges. Returns `[0..1]` |
 | `findSimilar(name)` | Return all grades sorted by descending similarity. Base grade is excluded |
+| `explainSimilarity(aName, bName, opts?)` | Human-readable breakdown of two grades. `opts.lang: "ru" \| "en"`. Returns `{ summary, factors }` or `null` |
+
+### Selection
+
+| Function | Description |
+|---|---|
+| `findBy(filter)` | Return all `Steel` matching a filter (AND semantics). Empty filter returns all grades |
+| `matchesFilter(steel, filter)` | Per-grade predicate behind `findBy` |
+
+Filter fields (all optional): `category` (or array = OR), `min/maxTensile`, `min/maxYield`, `min/maxElongation`, `min/maxHardnessHrc`, `min/maxHardnessHb`, `min/maxCarbon`, `hasElement` (or array = AND), `minElement` / `maxElement` (`{ Cr: 0.8 }`). `min*` checks the grade's guaranteed lower bound, `max*` the upper bound.
+
+### Metrics
+
+| Function | Description |
+|---|---|
+| `calcPREN(steel)` | Pitting Resistance Equivalent: `Cr + 3.3·Mo + 16·N` (N taken as 0 — not in DB) |
+| `calcCEV(steel)` | Carbon equivalent, IIW: `C + Mn/6 + (Cr+Mo+V)/5 + (Cu+Ni)/15` (weldability) |
+
+Both use nominal (midpoint) content from the `{min, max}` ranges.
 
 ## Data model
 
@@ -127,23 +162,29 @@ See [`src/similarity.ts`](./src/similarity.ts) for full weight table and rationa
 
 ## Coverage
 
-v0.1.0 ships with **60 GOST grades** across categories:
+v0.3.0 ships with **72 GOST grades** across categories:
 
 - **Carbon construction** — Ст3, Ст5, Сталь 10–60
 - **Alloy structural** — 20Х, 40Х, 30ХГСА, 40ХН, 12ХН3А, 40ХН2МА, 38Х2МЮА, etc.
+- **Heat-resistant / creep-resistant** — 15Х5М, 12Х1МФ, 15ХМ, 12МХ
+- **Weldable low-alloy** — 09Г2С, 10Г2С1, 16ГС, 17ГС, 15ХСНД
 - **Spring** — 65Г, 60С2А, 50ХФА, 70С3А
 - **Bearing** — ШХ15, ШХ15СГ
 - **Tool carbon** — У7, У8, У9, У10, У12
 - **Tool alloy** — ХВГ, 5ХНМ, 4Х5МФС, Х12, Х12МФ, Х12Ф1, 9ХС
 - **High-speed** — Р6М5, Р18, Р6М5К5
-- **Stainless** — 08Х18Н10, 08Х18Н10Т, 12Х18Н10Т, 12Х13, 20Х13, 40Х13, 10Х17Н13М2Т
+- **Stainless / austenitic** — 08Х18Н10, 12Х18Н10Т, 12Х18Н9, 12Х13, 20Х13, 40Х13, 10Х17Н13М2Т, 10Х11Н20Т3Р, 20Х23Н18
 
-Foreign standards (AISI / DIN-EN / JIS) are included as cross-reference fields on each grade. Standalone non-GOST entries are planned for v0.2.0.
+Foreign standards (AISI / DIN-EN / JIS) are included as cross-reference fields on each grade.
+
+> Chemical compositions follow GOST; mechanical/physical properties are representative values (depend on section size and heat treatment).
 
 ## Roadmap
 
-- **v0.2.0** — search by AISI/DIN/JIS, `explainSimilarity()`, test suite, more grades
-- **v1.0.0** — stable API, CLI (`npx steel-lib compare <a> <b>`), full JSDoc
+- **v0.2.0** ✅ — search by AISI/DIN/JIS (`getSteelByStandard`), `explainSimilarity()`, test suite
+- **v0.3.0** ✅ — `findBy()` selection engine, +12 grades, `calcPREN()` / `calcCEV()`
+- **v0.4+** — CLI (`npx steel-lib compare <a> <b>`), full JSDoc, English grade descriptions
+- **v1.0.0** — frozen API, documentation site
 
 ## License
 
