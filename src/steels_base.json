@@ -4532,7 +4532,7 @@
           "max": 170
         },
         "tensile_strength_mpa": 590,
-        "yield_strength_mpa": 390,
+        "yield_strength_mpa": 412,
         "elongation_percent": 20,
         "impact_toughness_j_cm2": 118
       },
@@ -4554,7 +4554,7 @@
       },
       "chemical_composition": {
         "C": {
-          "min": 0.08,
+          "min": 0.1,
           "max": 0.15
         },
         "Cr": {
@@ -4583,7 +4583,7 @@
         },
         "P": {
           "min": null,
-          "max": 0.025
+          "max": 0.03
         },
         "S": {
           "min": null,
@@ -4604,7 +4604,7 @@
           "max": 179
         },
         "tensile_strength_mpa": 470,
-        "yield_strength_mpa": 280,
+        "yield_strength_mpa": 255,
         "elongation_percent": 21,
         "impact_toughness_j_cm2": 98
       },
@@ -4675,8 +4675,8 @@
           "min": null,
           "max": 187
         },
-        "tensile_strength_mpa": 490,
-        "yield_strength_mpa": 295,
+        "tensile_strength_mpa": 440,
+        "yield_strength_mpa": 275,
         "elongation_percent": 21,
         "impact_toughness_j_cm2": 118
       },
@@ -4703,11 +4703,11 @@
         },
         "Cr": {
           "min": 0.4,
-          "max": 0.6
+          "max": 0.7
         },
         "Mo": {
           "min": 0.4,
-          "max": 0.55
+          "max": 0.6
         },
         "V": {
           "min": null,
@@ -4747,10 +4747,10 @@
           "min": null,
           "max": 170
         },
-        "tensile_strength_mpa": 420,
+        "tensile_strength_mpa": 410,
         "yield_strength_mpa": 235,
         "elongation_percent": 21,
-        "impact_toughness_j_cm2": 118
+        "impact_toughness_j_cm2": 59
       },
       "physical_properties": {
         "density_g_cm3": 7.85,
@@ -4891,8 +4891,8 @@
           "min": null,
           "max": 190
         },
-        "tensile_strength_mpa": 500,
-        "yield_strength_mpa": 360,
+        "tensile_strength_mpa": 490,
+        "yield_strength_mpa": 355,
         "elongation_percent": 21,
         "impact_toughness_j_cm2": 59
       },
@@ -4964,7 +4964,7 @@
           "max": 185
         },
         "tensile_strength_mpa": 490,
-        "yield_strength_mpa": 295,
+        "yield_strength_mpa": 325,
         "elongation_percent": 21,
         "impact_toughness_j_cm2": 59
       },
@@ -5058,7 +5058,7 @@
       },
       "chemical_composition": {
         "C": {
-          "min": null,
+          "min": 0.12,
           "max": 0.18
         },
         "Cr": {
@@ -5179,8 +5179,8 @@
           "min": null,
           "max": 179
         },
-        "tensile_strength_mpa": 550,
-        "yield_strength_mpa": 205,
+        "tensile_strength_mpa": 530,
+        "yield_strength_mpa": 196,
         "elongation_percent": 40,
         "impact_toughness_j_cm2": 250
       },
@@ -5231,7 +5231,7 @@
         },
         "P": {
           "min": null,
-          "max": 0.02
+          "max": 0.035
         },
         "S": {
           "min": null,
@@ -5253,12 +5253,12 @@
         },
         "hardness_hb": {
           "min": null,
-          "max": 269
+          "max": 302
         },
-        "tensile_strength_mpa": 700,
-        "yield_strength_mpa": 350,
-        "elongation_percent": 20,
-        "impact_toughness_j_cm2": 80
+        "tensile_strength_mpa": 880,
+        "yield_strength_mpa": 590,
+        "elongation_percent": 10,
+        "impact_toughness_j_cm2": 29
       },
       "physical_properties": {
         "density_g_cm3": 8,
