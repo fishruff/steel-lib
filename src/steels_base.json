@@ -4469,6 +4469,874 @@
         "thermal_conductivity_w_mk": 15
       },
       "description": "Аустенитная хромоникельмолибденовая сталь со стабилизирующим титаном (аналог AISI 316Ti). Стойка к питтинговой и щелевой коррозии в кислых и хлоридных средах; для химического и нефтегазового оборудования."
+    },
+    {
+      "id": "gost-15h5m",
+      "name": "15Х5М",
+      "category": "конструкционная легированная",
+      "standards": {
+        "aisi": "501",
+        "din_en": "X12CrMo5 (1.7362)",
+        "gost": "15Х5М",
+        "jis": null
+      },
+      "chemical_composition": {
+        "C": {
+          "min": null,
+          "max": 0.15
+        },
+        "Cr": {
+          "min": 4.5,
+          "max": 6
+        },
+        "Mo": {
+          "min": 0.45,
+          "max": 0.6
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": null,
+          "max": 0.5
+        },
+        "Si": {
+          "min": null,
+          "max": 0.5
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.6
+        },
+        "P": {
+          "min": null,
+          "max": 0.03
+        },
+        "S": {
+          "min": null,
+          "max": 0.025
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.2
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": null,
+          "max": null
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 170
+        },
+        "tensile_strength_mpa": 590,
+        "yield_strength_mpa": 390,
+        "elongation_percent": 20,
+        "impact_toughness_j_cm2": 118
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.75,
+        "thermal_conductivity_w_mk": 26
+      },
+      "description": "Хромомолибденовая теплоустойчивая сталь (5% Cr). Стойка к окислению и водородной коррозии при 500–600 °C; для труб, крепежа и аппаратуры нефтеперерабатывающих и нефтехимических установок."
+    },
+    {
+      "id": "gost-12h1mf",
+      "name": "12Х1МФ",
+      "category": "конструкционная легированная",
+      "standards": {
+        "aisi": null,
+        "din_en": "14MoV6-3 (1.7715)",
+        "gost": "12Х1МФ",
+        "jis": null
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 0.08,
+          "max": 0.15
+        },
+        "Cr": {
+          "min": 0.9,
+          "max": 1.2
+        },
+        "Mo": {
+          "min": 0.25,
+          "max": 0.35
+        },
+        "V": {
+          "min": 0.15,
+          "max": 0.3
+        },
+        "Mn": {
+          "min": 0.4,
+          "max": 0.7
+        },
+        "Si": {
+          "min": 0.17,
+          "max": 0.37
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.3
+        },
+        "P": {
+          "min": null,
+          "max": 0.025
+        },
+        "S": {
+          "min": null,
+          "max": 0.025
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.2
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": null,
+          "max": null
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 179
+        },
+        "tensile_strength_mpa": 470,
+        "yield_strength_mpa": 280,
+        "elongation_percent": 21,
+        "impact_toughness_j_cm2": 98
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.85,
+        "thermal_conductivity_w_mk": 38
+      },
+      "description": "Хромомолибденованадиевая теплоустойчивая сталь для энергетики. Работает под давлением при температурах до 570–585 °C; для паропроводов, пароперегревателей и коллекторов котлов ТЭС."
+    },
+    {
+      "id": "gost-15hm",
+      "name": "15ХМ",
+      "category": "конструкционная легированная",
+      "standards": {
+        "aisi": null,
+        "din_en": "13CrMo4-5 (1.7335)",
+        "gost": "15ХМ",
+        "jis": null
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 0.11,
+          "max": 0.18
+        },
+        "Cr": {
+          "min": 0.8,
+          "max": 1.1
+        },
+        "Mo": {
+          "min": 0.4,
+          "max": 0.55
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": 0.4,
+          "max": 0.7
+        },
+        "Si": {
+          "min": 0.17,
+          "max": 0.37
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.3
+        },
+        "P": {
+          "min": null,
+          "max": 0.035
+        },
+        "S": {
+          "min": null,
+          "max": 0.035
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.3
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": null,
+          "max": null
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 187
+        },
+        "tensile_strength_mpa": 490,
+        "yield_strength_mpa": 295,
+        "elongation_percent": 21,
+        "impact_toughness_j_cm2": 118
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.85,
+        "thermal_conductivity_w_mk": 40
+      },
+      "description": "Хромомолибденовая теплоустойчивая сталь. Сохраняет прочность и сопротивление ползучести при 500–550 °C; для котельных труб, фланцев и крепежа энергетического оборудования."
+    },
+    {
+      "id": "gost-12mh",
+      "name": "12МХ",
+      "category": "конструкционная легированная",
+      "standards": {
+        "aisi": null,
+        "din_en": null,
+        "gost": "12МХ",
+        "jis": null
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 0.09,
+          "max": 0.16
+        },
+        "Cr": {
+          "min": 0.4,
+          "max": 0.6
+        },
+        "Mo": {
+          "min": 0.4,
+          "max": 0.55
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": 0.4,
+          "max": 0.7
+        },
+        "Si": {
+          "min": 0.17,
+          "max": 0.37
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.3
+        },
+        "P": {
+          "min": null,
+          "max": 0.03
+        },
+        "S": {
+          "min": null,
+          "max": 0.025
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.2
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": null,
+          "max": null
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 170
+        },
+        "tensile_strength_mpa": 420,
+        "yield_strength_mpa": 235,
+        "elongation_percent": 21,
+        "impact_toughness_j_cm2": 118
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.85,
+        "thermal_conductivity_w_mk": 41
+      },
+      "description": "Низколегированная хромомолибденовая теплоустойчивая сталь. Для пароперегревателей и трубопроводов котлов, работающих при температурах до 530–540 °C."
+    },
+    {
+      "id": "gost-09g2s",
+      "name": "09Г2С",
+      "category": "конструкционная легированная",
+      "standards": {
+        "aisi": null,
+        "din_en": null,
+        "gost": "09Г2С",
+        "jis": null
+      },
+      "chemical_composition": {
+        "C": {
+          "min": null,
+          "max": 0.12
+        },
+        "Cr": {
+          "min": null,
+          "max": 0.3
+        },
+        "Mo": {
+          "min": null,
+          "max": null
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": 1.3,
+          "max": 1.7
+        },
+        "Si": {
+          "min": 0.5,
+          "max": 0.8
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.3
+        },
+        "P": {
+          "min": null,
+          "max": 0.035
+        },
+        "S": {
+          "min": null,
+          "max": 0.04
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.3
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": null,
+          "max": null
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 190
+        },
+        "tensile_strength_mpa": 490,
+        "yield_strength_mpa": 345,
+        "elongation_percent": 21,
+        "impact_toughness_j_cm2": 64
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.85,
+        "thermal_conductivity_w_mk": 50
+      },
+      "description": "Низколегированная марганцово-кремнистая сталь повышенной прочности с хорошей свариваемостью. Сохраняет вязкость до −70 °C; для сварных металлоконструкций, сосудов, мостов и судостроения."
+    },
+    {
+      "id": "gost-10g2s1",
+      "name": "10Г2С1",
+      "category": "конструкционная легированная",
+      "standards": {
+        "aisi": null,
+        "din_en": null,
+        "gost": "10Г2С1",
+        "jis": null
+      },
+      "chemical_composition": {
+        "C": {
+          "min": null,
+          "max": 0.12
+        },
+        "Cr": {
+          "min": null,
+          "max": 0.3
+        },
+        "Mo": {
+          "min": null,
+          "max": null
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": 1.3,
+          "max": 1.65
+        },
+        "Si": {
+          "min": 0.8,
+          "max": 1.1
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.3
+        },
+        "P": {
+          "min": null,
+          "max": 0.035
+        },
+        "S": {
+          "min": null,
+          "max": 0.04
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.3
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": null,
+          "max": null
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 190
+        },
+        "tensile_strength_mpa": 500,
+        "yield_strength_mpa": 360,
+        "elongation_percent": 21,
+        "impact_toughness_j_cm2": 59
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.85,
+        "thermal_conductivity_w_mk": 49
+      },
+      "description": "Низколегированная марганцово-кремнистая свариваемая сталь повышенной прочности. Для сварных конструкций, резервуаров и трубопроводов, в том числе при пониженных температурах."
+    },
+    {
+      "id": "gost-16gs",
+      "name": "16ГС",
+      "category": "конструкционная легированная",
+      "standards": {
+        "aisi": null,
+        "din_en": null,
+        "gost": "16ГС",
+        "jis": null
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 0.12,
+          "max": 0.18
+        },
+        "Cr": {
+          "min": null,
+          "max": 0.3
+        },
+        "Mo": {
+          "min": null,
+          "max": null
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": 0.9,
+          "max": 1.2
+        },
+        "Si": {
+          "min": 0.4,
+          "max": 0.7
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.3
+        },
+        "P": {
+          "min": null,
+          "max": 0.035
+        },
+        "S": {
+          "min": null,
+          "max": 0.04
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.3
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": null,
+          "max": null
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 185
+        },
+        "tensile_strength_mpa": 490,
+        "yield_strength_mpa": 295,
+        "elongation_percent": 21,
+        "impact_toughness_j_cm2": 59
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.85,
+        "thermal_conductivity_w_mk": 50
+      },
+      "description": "Низколегированная марганцово-кремнистая сталь для сосудов и аппаратов, работающих под давлением. Хорошо сваривается; применяется в котлостроении и химическом машиностроении."
+    },
+    {
+      "id": "gost-17gs",
+      "name": "17ГС",
+      "category": "конструкционная легированная",
+      "standards": {
+        "aisi": null,
+        "din_en": null,
+        "gost": "17ГС",
+        "jis": null
+      },
+      "chemical_composition": {
+        "C": {
+          "min": 0.14,
+          "max": 0.2
+        },
+        "Cr": {
+          "min": null,
+          "max": 0.3
+        },
+        "Mo": {
+          "min": null,
+          "max": null
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": 1,
+          "max": 1.4
+        },
+        "Si": {
+          "min": 0.4,
+          "max": 0.6
+        },
+        "Ni": {
+          "min": null,
+          "max": 0.3
+        },
+        "P": {
+          "min": null,
+          "max": 0.035
+        },
+        "S": {
+          "min": null,
+          "max": 0.04
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.3
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": null,
+          "max": null
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 190
+        },
+        "tensile_strength_mpa": 510,
+        "yield_strength_mpa": 345,
+        "elongation_percent": 23,
+        "impact_toughness_j_cm2": 59
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.85,
+        "thermal_conductivity_w_mk": 49
+      },
+      "description": "Низколегированная марганцово-кремнистая свариваемая сталь. Для электросварных труб большого диаметра, сосудов и металлоконструкций повышенной прочности."
+    },
+    {
+      "id": "gost-15hsnd",
+      "name": "15ХСНД",
+      "category": "конструкционная легированная",
+      "standards": {
+        "aisi": null,
+        "din_en": null,
+        "gost": "15ХСНД",
+        "jis": null
+      },
+      "chemical_composition": {
+        "C": {
+          "min": null,
+          "max": 0.18
+        },
+        "Cr": {
+          "min": 0.6,
+          "max": 0.9
+        },
+        "Mo": {
+          "min": null,
+          "max": null
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": 0.4,
+          "max": 0.7
+        },
+        "Si": {
+          "min": 0.4,
+          "max": 0.7
+        },
+        "Ni": {
+          "min": 0.3,
+          "max": 0.6
+        },
+        "P": {
+          "min": null,
+          "max": 0.035
+        },
+        "S": {
+          "min": null,
+          "max": 0.04
+        },
+        "Cu": {
+          "min": 0.2,
+          "max": 0.4
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": null,
+          "max": null
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 200
+        },
+        "tensile_strength_mpa": 540,
+        "yield_strength_mpa": 345,
+        "elongation_percent": 21,
+        "impact_toughness_j_cm2": 59
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.85,
+        "thermal_conductivity_w_mk": 42
+      },
+      "description": "Низколегированная хромокремненикельмедистая сталь повышенной прочности и атмосферостойкости. Хорошо сваривается; для мостов, вагонов и ответственных сварных металлоконструкций."
+    },
+    {
+      "id": "gost-12h18n9",
+      "name": "12Х18Н9",
+      "category": "коррозионностойкая",
+      "standards": {
+        "aisi": "302",
+        "din_en": "X10CrNi18-8 (1.4310)",
+        "gost": "12Х18Н9",
+        "jis": "SUS302"
+      },
+      "chemical_composition": {
+        "C": {
+          "min": null,
+          "max": 0.12
+        },
+        "Cr": {
+          "min": 17,
+          "max": 19
+        },
+        "Mo": {
+          "min": null,
+          "max": null
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": null,
+          "max": 2
+        },
+        "Si": {
+          "min": null,
+          "max": 0.8
+        },
+        "Ni": {
+          "min": 8,
+          "max": 10
+        },
+        "P": {
+          "min": null,
+          "max": 0.035
+        },
+        "S": {
+          "min": null,
+          "max": 0.02
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.3
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": null,
+          "max": null
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 179
+        },
+        "tensile_strength_mpa": 550,
+        "yield_strength_mpa": 205,
+        "elongation_percent": 40,
+        "impact_toughness_j_cm2": 250
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.9,
+        "thermal_conductivity_w_mk": 16
+      },
+      "description": "Аустенитная хромоникелевая нержавеющая сталь (аналог AISI 302/304). Немагнитна, сохраняет вязкость при криогенных температурах; для сварной аппаратуры и деталей, работающих от −196 °C."
+    },
+    {
+      "id": "gost-10h11n20t3r",
+      "name": "10Х11Н20Т3Р",
+      "category": "коррозионностойкая",
+      "standards": {
+        "aisi": null,
+        "din_en": null,
+        "gost": "10Х11Н20Т3Р",
+        "jis": null
+      },
+      "chemical_composition": {
+        "C": {
+          "min": null,
+          "max": 0.1
+        },
+        "Cr": {
+          "min": 10,
+          "max": 12.5
+        },
+        "Mo": {
+          "min": null,
+          "max": null
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": null,
+          "max": 1
+        },
+        "Si": {
+          "min": null,
+          "max": 1
+        },
+        "Ni": {
+          "min": 18,
+          "max": 21
+        },
+        "P": {
+          "min": null,
+          "max": 0.02
+        },
+        "S": {
+          "min": null,
+          "max": 0.02
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.3
+        },
+        "Ti": {
+          "min": 2.6,
+          "max": 3.2
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": null,
+          "max": null
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 269
+        },
+        "tensile_strength_mpa": 700,
+        "yield_strength_mpa": 350,
+        "elongation_percent": 20,
+        "impact_toughness_j_cm2": 80
+      },
+      "physical_properties": {
+        "density_g_cm3": 8,
+        "thermal_conductivity_w_mk": 14
+      },
+      "description": "Жаропрочная аустенитная хромоникелевая сталь с титаном, дисперсионно-твердеющая (ЭИ696Р). Для крепежа, пружин и деталей газовых турбин, работающих при температурах до 700 °C."
+    },
+    {
+      "id": "gost-20h23n18",
+      "name": "20Х23Н18",
+      "category": "коррозионностойкая",
+      "standards": {
+        "aisi": "310S",
+        "din_en": "X8CrNi25-21 (1.4845)",
+        "gost": "20Х23Н18",
+        "jis": "SUS310S"
+      },
+      "chemical_composition": {
+        "C": {
+          "min": null,
+          "max": 0.2
+        },
+        "Cr": {
+          "min": 22,
+          "max": 25
+        },
+        "Mo": {
+          "min": null,
+          "max": null
+        },
+        "V": {
+          "min": null,
+          "max": null
+        },
+        "Mn": {
+          "min": null,
+          "max": 2
+        },
+        "Si": {
+          "min": null,
+          "max": 1
+        },
+        "Ni": {
+          "min": 17,
+          "max": 20
+        },
+        "P": {
+          "min": null,
+          "max": 0.035
+        },
+        "S": {
+          "min": null,
+          "max": 0.02
+        },
+        "Cu": {
+          "min": null,
+          "max": 0.3
+        }
+      },
+      "mechanical_properties": {
+        "hardness_hrc": {
+          "min": null,
+          "max": null
+        },
+        "hardness_hb": {
+          "min": null,
+          "max": 179
+        },
+        "tensile_strength_mpa": 500,
+        "yield_strength_mpa": 196,
+        "elongation_percent": 35,
+        "impact_toughness_j_cm2": 200
+      },
+      "physical_properties": {
+        "density_g_cm3": 7.9,
+        "thermal_conductivity_w_mk": 15
+      },
+      "description": "Жаропрочная и жаростойкая аустенитная хромоникелевая сталь (аналог AISI 310S). Стойка к окислению до 1000–1050 °C; для деталей печей, газопроводов и теплообменников."
     }
   ]
 }

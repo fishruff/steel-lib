@@ -349,12 +349,40 @@ describe("explainSimilarity", () => {
 
 /**
  * =========================
+ * v0.3 grades — регрессия на новые группы
+ * =========================
+ */
+describe("v0.3 new grades", () => {
+    it("weldable low-alloy 09Г2С is closest to its sibling 10Г2С1", () => {
+        expect(findSimilar("09Г2С")![0].steel).toBe("10Г2С1");
+    });
+
+    it("austenitic 12Х18Н9 ranks stainless 18-10 grades highest", () => {
+        const top3 = findSimilar("12Х18Н9")!.slice(0, 3).map((r) => r.steel);
+        expect(top3).toContain("12Х18Н10Т");
+    });
+
+    it("heat-resistant grades are alloyed with Cr and Mo", () => {
+        for (const name of ["15Х5М", "12Х1МФ", "15ХМ", "12МХ"]) {
+            const s = getSteel(name)!;
+            expect(s.chemical_composition.Cr.min).not.toBeNull();
+            expect(s.chemical_composition.Mo.min).not.toBeNull();
+        }
+    });
+
+    it("resolves 20Х23Н18 by its AISI standard 310S", () => {
+        expect(getSteelByStandard("310S")!.name).toBe("20Х23Н18");
+    });
+});
+
+/**
+ * =========================
  * Database integrity
  * =========================
  */
 describe("Database integrity", () => {
-    it("contains 60 steels", () => {
-        expect(steels).toHaveLength(60);
+    it("contains 72 steels", () => {
+        expect(steels).toHaveLength(72);
     });
 
     it("all steel IDs are unique", () => {
