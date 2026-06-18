@@ -61,6 +61,20 @@ calcPREN(getSteel("10Х17Н13М2Т")!); // ~25.25 — стойкость к пи
 calcCEV(getSteel("09Г2С")!);         // ~0.36 — углеродный эквивалент (свариваемость)
 ```
 
+## CLI
+
+Использование из терминала без JS-проекта:
+
+```bash
+npx steel-lib compare 40Х 45Х          # 40Х vs 45Х → 85% похожи
+npx steel-lib similar Ст3 -n 5          # 5 ближайших аналогов
+npx steel-lib explain Сталь\ 20 Сталь\ 45   # разбор по факторам (--en для англ.)
+npx steel-lib info 10Х17Н13М2Т          # карточка марки: состав, механика, PREN/CEV
+npx steel-lib find --has Cr,Ni --min-tensile 900   # подбор по критериям
+```
+
+Флаги `find`: `--category`, `--has <Cr,Ni>`, `--min-tensile` / `--max-tensile`, `--min-carbon` / `--max-carbon`. Полный список — `steel-lib --help`.
+
 ## Сценарии использования
 
 - **Замена дефицитной марки** — найти эквивалент, когда оригинал недоступен

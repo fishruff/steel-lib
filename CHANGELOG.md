@@ -4,6 +4,16 @@
 Формат основан на [Keep a Changelog](https://keepachangelog.com/ru/),
 проект придерживается [семантического версионирования](https://semver.org/lang/ru/).
 
+## [Unreleased]
+
+### Added
+
+- CLI (`npx steel-lib`): команды `compare`, `explain`, `similar`, `info`, `find`, плюс `--help` / `--version`. Bin-entry `steel-lib`.
+
+### Changed
+
+- В devDependencies добавлен `@types/node` (нужен для CLI); в `tsconfig` — `types: ["node"]`.
+
 ## [0.3.0] — 2026-06-16
 
 ### Added

@@ -61,6 +61,20 @@ calcPREN(getSteel("10Х17Н13М2Т")!); // ~25.25 — pitting resistance (Cr + 3
 calcCEV(getSteel("09Г2С")!);         // ~0.36 — carbon equivalent (weldability)
 ```
 
+## CLI
+
+Use it from the terminal without a JS project:
+
+```bash
+npx steel-lib compare 40Х 45Х          # 40Х vs 45Х → 85% похожи
+npx steel-lib similar Ст3 -n 5          # 5 nearest analogues
+npx steel-lib explain Сталь\ 20 Сталь\ 45   # factor-by-factor breakdown (--en for English)
+npx steel-lib info 10Х17Н13М2Т          # grade card: composition, mechanics, PREN/CEV
+npx steel-lib find --has Cr,Ni --min-tensile 900   # select grades by spec
+```
+
+`find` flags: `--category`, `--has <Cr,Ni>`, `--min-tensile` / `--max-tensile`, `--min-carbon` / `--max-carbon`. Run `steel-lib --help` for the full list.
+
 ## Use cases
 
 - **Substitute scarce grades** — find a near-equivalent grade when the original is unavailable

@@ -25,6 +25,9 @@
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "bin": {
+    "steel-lib": "./dist/cli.js"
+  },
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -45,6 +48,7 @@
     "prepublishOnly": "npm run build"
   },
   "devDependencies": {
+    "@types/node": "^25.9.3",
     "typescript": "^6.0.3",
     "vitest": "^4.1.7"
   }
