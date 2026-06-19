@@ -15,6 +15,7 @@
  */
 import { readFileSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
+import { validateDb } from "./db_rules.mjs";
 
 const BASE = "http://www.splav-kharkov.com/mat_start.php?name_id=";
 
@@ -111,39 +112,40 @@ function parseMech(html) {
     if (!pick) return { mech: null, warns: ["не распознаны строки механики"], row: null };
     // nums по порядку: sв, sT, d5, [y], [KCU]
     const [sv, st, d5, , kcu] = pick.nums;
-    // Sanity: σв≥σт и δ<100 — иначе разметку колонок «повело», доверять нельзя.
-    if (Number.isFinite(sv) && Number.isFinite(st) && sv < st)
-        warns.push("механика: σв<σт — сбита разметка колонок, нужна ручная проверка");
-    if (Number.isFinite(d5) && d5 >= 100) warns.push(`механика: δ=${d5}% неправдоподобно — ручная проверка`);
+    // Sanity: σв≥σт и δ<100 — иначе разметку колонок «повело». В этом случае
+    // механике доверять нельзя → обнуляем (честное «нужно вручную», а не враньё).
+    const suspect =
+        (Number.isFinite(sv) && Number.isFinite(st) && sv < st) ||
+        (Number.isFinite(d5) && d5 >= 100);
+    if (suspect) warns.push("механика: разметка колонок сбита (σв<σт или δ≥100%) — обнулена, заполнить вручную");
     // HB из строки твёрдости. Ищем по очищенному от тегов тексту ("HB 10-1 = 179").
     const plain = html.replace(/<[^>]+>/g, " ").replace(/&nbsp;/g, " ");
     const hbm = plain.match(/HB[\s\S]{0,12}?=\s*([\d.,]+)/i);
     const hb = hbm ? num(hbm[1]) : null;
+    const ok = (v) => (!suspect && Number.isFinite(v) ? v : null);
     const mech = {
         hardness_hrc: { min: null, max: null },
         hardness_hb: { min: null, max: hb },
-        tensile_strength_mpa: Number.isFinite(sv) ? sv : null,
-        yield_strength_mpa: Number.isFinite(st) ? st : null,
-        elongation_percent: Number.isFinite(d5) ? d5 : null,
+        tensile_strength_mpa: ok(sv),
+        yield_strength_mpa: ok(st),
+        elongation_percent: ok(d5),
         // KCU на сайте в кДж/м²; наш формат — Дж/см² = /10.
-        impact_toughness_j_cm2: Number.isFinite(kcu) ? Math.round(kcu / 10) : null,
+        impact_toughness_j_cm2: ok(kcu) === null ? null : Math.round(kcu / 10),
     };
     return { mech, warns, row: pick.sortament };
 }
 
+/**
+ * Валидация staging через единые правила db_rules. Метаданные, ещё не
+ * заполненные парсером (id/category/description), подставляются заглушками,
+ * чтобы остались только проблемы данных (диапазоны, σт≤σв, элементы).
+ */
 function validate(steel) {
-    const errs = [];
-    if (!steel.name) errs.push("нет name");
-    for (const [el, r] of Object.entries(steel.chemical_composition)) {
-        if (r.min !== null && (r.min < 0 || r.min > 100)) errs.push(`${el}.min вне [0,100]`);
-        if (r.max !== null && (r.max < 0 || r.max > 100)) errs.push(`${el}.max вне [0,100]`);
-        if (r.min !== null && r.max !== null && r.min > r.max) errs.push(`${el}: min>max`);
-    }
-    const mp = steel.mechanical_properties;
-    for (const k of ["tensile_strength_mpa", "yield_strength_mpa", "elongation_percent"]) {
-        if (mp[k] !== null && mp[k] < 0) errs.push(`${k} < 0`);
-    }
-    return errs;
+    const clone = structuredClone(steel);
+    clone.id = clone.id || "staging-tmp";
+    clone.category = clone.category || "конструкционная легированная";
+    clone.description = clone.description || "(staging)";
+    return validateDb({ steels: [clone] });
 }
 
 function diffRange(a, b) {
