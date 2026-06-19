@@ -5244,6 +5244,10 @@
         "Ti": {
           "min": 2.6,
           "max": 3.2
+        },
+        "B": {
+          "min": 0.008,
+          "max": 0.02
         }
       },
       "mechanical_properties": {

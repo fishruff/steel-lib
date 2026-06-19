@@ -4,6 +4,14 @@
 Формат основан на [Keep a Changelog](https://keepachangelog.com/ru/),
 проект придерживается [семантического версионирования](https://semver.org/lang/ru/).
 
+## [Unreleased]
+
+### Added
+
+- Схема `chemical_composition` расширена элементами `B` (бор) и `N` (азот); `calcPREN` теперь учитывает `N` (`+16·N`). Бор заполнен для `10Х11Н20Т3Р`.
+- Валидатор БД: `scripts/db_rules.mjs` (единые правила) + `npm run validate` (CLI) + тесты `tests/data.test.ts` — структура, диапазоны (0≤min≤max, % и механика в норме), уникальность, σт≤σв.
+- Прототип-парсер `scripts/parse_splav.mjs` (splav-kharkov → staging + валидация + diff vs БД) — инструмент для сверки, не публикуется.
+
 ## [0.4.0] — 2026-06-18
 
 ### Added

@@ -139,7 +139,7 @@ type Steel = {
         Mn: MinMax; Si: MinMax; Ni: MinMax;
         P: MinMax; S: MinMax; Cu: MinMax;
         Ti?: MinMax; W?: MinMax; Co?: MinMax;
-        Al?: MinMax; As?: MinMax;
+        Al?: MinMax; As?: MinMax; B?: MinMax; N?: MinMax;
     };
     mechanical_properties: {
         hardness_hrc: MinMax;

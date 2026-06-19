@@ -45,6 +45,7 @@
     "build": "tsc && cp src/steels_base.json dist/steels_base.json",
     "test": "vitest",
     "test:run": "vitest run",
+    "validate": "node scripts/validate_db.mjs",
     "prepublishOnly": "npm run build"
   },
   "devDependencies": {

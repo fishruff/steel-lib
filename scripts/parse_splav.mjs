@@ -20,7 +20,7 @@ const BASE = "http://www.splav-kharkov.com/mat_start.php?name_id=";
 
 // Элементы, которые есть в нашей схеме chemical_composition.
 const SCHEMA_ELEMENTS = new Set([
-    "C", "Cr", "Mo", "V", "Mn", "Si", "Ni", "P", "S", "Cu", "Ti", "W", "Co", "Al", "As",
+    "C", "Cr", "Mo", "V", "Mn", "Si", "Ni", "P", "S", "Cu", "Ti", "W", "Co", "Al", "As", "B", "N",
 ]);
 const BASE_ELEMENTS = ["C", "Cr", "Mo", "V", "Mn", "Si", "Ni", "P", "S", "Cu"];
 
