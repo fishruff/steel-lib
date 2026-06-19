@@ -2,3 +2,4 @@ node_modules/
 dist/
 CODE_REVIEW.md
 .env
+scripts/staging.json
